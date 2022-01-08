@@ -33,10 +33,10 @@ build/
 .vscode/
 
 ### Files ###
-.mvn/wrapper/MavenWrapperDownloader.java
-.mvn/wrapper/maven-wrapper.jar
-.mvn/wrapper/maven-wrapper.properties
-mvnw
-mvnw.cmd
-pom.xml
+### .mvn/wrapper/MavenWrapperDownloader.java ###
+### .mvn/wrapper/maven-wrapper.jar ###
+### .mvn/wrapper/maven-wrapper.properties ###
+### mvnw ###
+### mvnw.cmd ###
+### pom.xml ###
 src/main/resources/
