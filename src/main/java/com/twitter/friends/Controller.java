@@ -16,15 +16,26 @@ public class Controller {
 		try {
 			TwitterUser tu = Caller.OBJECT_MAPPER.readValue(Caller.jsonTwitterUserDataFromUsername(username), TwitterUser.class);
 			tu.initFriends();
-			int fsan = tu.friendsFollowersAverageNumber();
 			ObjectNode root = Caller.OBJECT_MAPPER.createObjectNode();
-			root.put("fsan", fsan);
+			
+			int fsan = tu.friendsFollowersAverageNumber();
+			root.put("friends_followers_average_number", fsan);
+			
+			int fgan = tu.friendsFollowingAverageNumber();
+			root.put("friends_following_average_number", fgan);
+			
+			int twan = tu.friendsTweetsAverageNumber();
+			root.put("friends_tweets_average_number", twan);
+			
+			float prwd = tu.friendsPercentageWithDescription();
+			root.put("friends_percentage_with_description", prwd);
+			
 			String jsonString = Caller.OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(root);
 			return jsonString;
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return "error";
+			return "some error";
 		}
 	}
 }
