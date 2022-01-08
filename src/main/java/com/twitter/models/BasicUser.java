@@ -6,6 +6,15 @@ public class BasicUser {
 	private String username;
 	
 	// TODO add constructors if needed
+	public BasicUser() {
+		
+	}
+	
+	public BasicUser(String id, String name, String username) {
+		this.id = id;
+		this.name = name;
+		this.username = username;
+	}
 	
 	public String getId() {
 		return id;

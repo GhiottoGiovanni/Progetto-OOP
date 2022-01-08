@@ -91,12 +91,13 @@ public class TwitterUser extends User implements Filters, Statistics{
 	
 	// filters START
 	@Override
-	public ArrayList<User> filterBasedOnFriendsDescription(String word) {
-		ArrayList<User> fs = new ArrayList<User>();
+	public ArrayList<BasicUser> filterBasedOnFriendsDescription(String word) {
+		ArrayList<BasicUser> fs = new ArrayList<BasicUser>();
 		for (User u : this.friends) {
 			// avoids case sensitivity
 			if (u.getDescription().toLowerCase().contains(word.toLowerCase())) {
-				fs.add(u);
+				BasicUser bu = new BasicUser(u.getId(), u.getName(), u.getUsername());
+				fs.add(bu);
 			}
 		}
 		return fs;
@@ -113,7 +114,6 @@ public class TwitterUser extends User implements Filters, Statistics{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	// filters END
 
 	@Override
 	public boolean isThisUserMyFriend(String username) {
@@ -124,4 +124,5 @@ public class TwitterUser extends User implements Filters, Statistics{
 		}
 		return false;
 	}
+	// filters END
 }
