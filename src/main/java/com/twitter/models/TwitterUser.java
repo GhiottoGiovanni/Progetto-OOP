@@ -104,40 +104,56 @@ public class TwitterUser extends User implements Filters, Statistics{
 	// statistics START
 	@Override
 	public int friendsFollowersAverageNumber() {
-		int sum = 0;
-		for (User u : this.friends) {
-			sum += u.getPublic_metrics().getFollowers_count();
+		if (this.friends_count != 0) {
+			int sum = 0;
+			for (User u : this.friends) {
+				sum += u.getPublic_metrics().getFollowers_count();
+			}
+			return sum / this.friends_count;
+		} else {
+			return 0;
 		}
-		return sum / this.friends_count;
 	}
 	
 	@Override
 	public int friendsFollowingAverageNumber() {
-		int sum = 0;
-		for (User u : this.friends) {
-			sum += u.getPublic_metrics().getFollowing_count();
+		if (this.friends_count != 0) {
+			int sum = 0;
+			for (User u : this.friends) {
+				sum += u.getPublic_metrics().getFollowing_count();
+			}
+			return sum / this.friends_count;
+		} else {
+			return 0;
 		}
-		return sum / this.friends_count;
 	}
 
 	@Override
 	public float friendsPercentageWithDescription() {
-		int friendsWithDescription = 0;
-		for (User u : this.friends) {
-			if (!u.getDescription().isBlank()) {
-				friendsWithDescription++;
+		if (this.friends_count != 0) {
+			int friendsWithDescription = 0;
+			for (User u : this.friends) {
+				if (!u.getDescription().isBlank()) {
+					friendsWithDescription++;
+				}
 			}
+			return (float)friendsWithDescription / this.friends_count * 100;
+		} else {
+			return 0;
 		}
-		return (float)friendsWithDescription / this.friends_count * 100;
 	}
 
 	@Override
 	public int friendsTweetsAverageNumber() {
-		int sum = 0;
-		for (User u : this.friends) {
-			sum += u.getPublic_metrics().getTweet_count();
+		if (this.friends_count != 0) {
+			int sum = 0;
+			for (User u : this.friends) {
+				sum += u.getPublic_metrics().getTweet_count();
+			}
+			return sum / this.friends_count;
+		} else {
+			return 0;
 		}
-		return sum / this.friends_count;
 	}
 	// statistics END
 	
