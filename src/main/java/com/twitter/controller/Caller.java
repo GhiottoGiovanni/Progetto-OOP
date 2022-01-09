@@ -18,16 +18,22 @@ public class Caller {
 	private static final String[] USER_FIELDS = {"description", "location", "verified", "public_metrics"};
 	
 	public static String jsonTwitterUserDataFromUsername(String username) {
-		String jsonData = jsonUserDataFromUsername(username, Caller.USER_FIELDS);		
-		try {
-			JsonNode jn = Caller.OBJECT_MAPPER.readTree(jsonData);
-			return jn.at("/data").toString();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-			return "";
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-			return "";
+		String jsonData = jsonUserDataFromUsername(username, Caller.USER_FIELDS);	
+		if (isNotNullOrEmptyString(jsonData)) {
+			try {
+				JsonNode jn = Caller.OBJECT_MAPPER.readTree(jsonData);
+				return jn.at("/data").toString();
+			} catch (JsonMappingException e) {
+				// TODO Auto-generated catch block
+				// e.printStackTrace();
+				return null;
+			} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+				// e.printStackTrace();
+				return null;
+			}
+		} else {
+			return null;
 		}
 	}
 	
@@ -35,18 +41,23 @@ public class Caller {
 		int maxResults = 100;
 		String endpoint = "following";
 		return dataFromUsername(username, endpoint, maxResults, Caller.USER_FIELDS, nextToken);
+		// returns null if bad request
 	}
 	
 	private static String dataFromUsername(String username, String endpoint, int maxResults, String[] userFields, String nextToken) {
 		String id = getIdFromUsername(username);
-		String path = "https://api.twitter.com/2/users/" + id + "/" + endpoint;
-		// adding the optional parameters
-		path += "?max_results=" + maxResults;
-		path += userFieldsToPath(userFields, false);
-		if (nextToken != null && !nextToken.isBlank()) {
-			path += "&pagination_token=" + nextToken; 
+		if (isNotNullOrEmptyString(id)) {
+			String path = "https://api.twitter.com/2/users/" + id + "/" + endpoint;
+			// adding the optional parameters
+			path += "?max_results=" + maxResults;
+			path += userFieldsToPath(userFields, false);
+			if (nextToken != null && !nextToken.isBlank()) {
+				path += "&pagination_token=" + nextToken; 
+			}
+			return jsonFromUrlString(path);
+		} else {
+			return null;
 		}
-		return jsonFromUrlString(path);
 	}
 	
 	private static String jsonFromUrlString(String urlString) {
@@ -67,33 +78,44 @@ public class Caller {
 			br.close();
 			return sb.toString();
 		} catch (MalformedURLException e) {
-			e.printStackTrace();
-			return "";
+			// TODO Auto-generated catch block
+			// e.printStackTrace();
+			return null;
 		} catch (ProtocolException e) {
-			e.printStackTrace();
-			return "";
+			// TODO Auto-generated catch block
+			// e.printStackTrace();
+			return null;
 		} catch (IOException e) {
-			e.printStackTrace();
-			return "";
+			// TODO Auto-generated catch block
+			// e.printStackTrace();
+			return null;
 		}
 	}
 	
 	private static String jsonUserDataFromUsername(String username, String[] userFields) {
 		return jsonFromUrlString("https://api.twitter.com/2/users/by/username/" + username + userFieldsToPath(userFields, true));
+		// returns null if bad request
 	}
 	
 	private static String getIdFromUsername(String username) {
-		String jsonData = jsonUserDataFromUsername(username, null);		
-		try {
-			JsonNode jn = Caller.OBJECT_MAPPER.readTree(jsonData);
-			return jn.at("/data/id").asText();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-			return "";
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-			return "";
+		String jsonData = jsonUserDataFromUsername(username, null);
+		if (isNotNullOrEmptyString(jsonData)) {
+			try {
+				JsonNode jn = Caller.OBJECT_MAPPER.readTree(jsonData);
+				return jn.at("/data/id").asText();
+			} catch (JsonMappingException e) {
+				// TODO Auto-generated catch block
+				// e.printStackTrace();
+				return null;
+			} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+				// e.printStackTrace();
+				return null;
+			}
+		} else {
+			return null;
 		}
+		
 	}
 	
 	private static String userFieldsToPath(String[] userFields, boolean atTheBeginning) {
@@ -108,5 +130,13 @@ public class Caller {
 			}
 		}
 		return userFieldsUrlFormat;
+	}
+	
+	public static boolean isNotNullOrEmptyString(String string) {
+		if (string == null || string.isEmpty() || string.isBlank()) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 }
