@@ -1,5 +1,7 @@
 package com.twitter.friends;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,8 +53,8 @@ public class Controller {
 		 
 	}
 	
-	@GetMapping("/filter")	
-	public String filter(@RequestParam(value = "username") String username, @RequestParam(value = "word") String word) {
+	@GetMapping("/filter_by_description")	
+	public String filterByDescription(@RequestParam(value = "username") String username, @RequestParam(value = "word") String word) {
 		String jsonTwitterUserData = Caller.jsonTwitterUserDataFromUsername(username);
 		if (Caller.isNotNullOrEmptyString(jsonTwitterUserData)) {
 			try {
@@ -74,6 +76,34 @@ public class Controller {
 		} else {
 			// TODO some error message
 			return "Controller filters if else 0";
+		}
+	}
+	
+	@GetMapping("/filter_following")
+	public String filterFollowing(@RequestParam(value = "username") String username, @RequestParam(value = "friends_usernames") List<String> friendsNames) {
+		String jsonTwitterUserData = Caller.jsonTwitterUserDataFromUsername(username);
+		if (Caller.isNotNullOrEmptyString(jsonTwitterUserData)) {
+			try {
+				TwitterUser tu = Caller.OBJECT_MAPPER.readValue(jsonTwitterUserData, TwitterUser.class);
+				tu.initFriends();
+				
+				ObjectNode root = Caller.OBJECT_MAPPER.createObjectNode();
+				
+				for (String friendName : friendsNames) {
+					boolean following = tu.isThisUserMyFriend(friendName);
+					root.put("following_%s".formatted(friendName), following);
+				}
+				
+				String jsonString = Caller.OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(root);
+				return jsonString;
+			} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+				// e.printStackTrace();
+				return "Controller stats try catch 0";
+			}
+		} else {
+			// TODO some error message
+			return "Controller stats if else 0";
 		}
 	}
 }

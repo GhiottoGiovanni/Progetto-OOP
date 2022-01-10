@@ -183,9 +183,10 @@ public class TwitterUser extends User implements Filters, Statistics{
 	}
 
 	@Override
-	public boolean isThisUserMyFriend(String username) {
+	public boolean isThisUserMyFriend(String name) {
 		for (User u : this.friends) {
-			if (u.getName().equals(username)) {
+			// avoids case sensitivity
+			if (u.getName().toLowerCase().equals(name.toLowerCase())) {
 				return true;
 			}
 		}
