@@ -17,8 +17,8 @@ import com.twitter.controller.Caller;
 
 public class TwitterUser extends User implements Filters, Statistics{
 	
-	// private static String USERS_STORAGE_PATH = "./src/main/resources/data/usernames/";
-	private static String FRIENDS_STORAGE_PATH = "./src/main/resources/data/friends/";
+	public final static String FRIENDS_STORAGE_DIR = "./src/main/resources/data/friends";
+	public final static String FRIENDS_STORAGE_PATH = FRIENDS_STORAGE_DIR + "/";
 	
 	private ArrayList<User>	friends = new ArrayList<User>();
 	private int friends_count;
@@ -42,7 +42,6 @@ public class TwitterUser extends User implements Filters, Statistics{
 	}
 	
 	public void initFriends() {
-		// TODO add an auto delete data when closed option
 		if (new File(getFriendsFileName()).exists()) {
 			initFriendsFromLocal();
 		} else {
@@ -55,7 +54,6 @@ public class TwitterUser extends User implements Filters, Statistics{
 			User[] friends = Caller.OBJECT_MAPPER.readValue(Paths.get(getFriendsFileName()).toFile(), User[].class);
 			Collections.addAll(this.friends, friends);
 			this.setFriends_count(this.friends.size());
-			System.out.println("dati presi e caricati correttamente");
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			// e.printStackTrace();
@@ -89,15 +87,16 @@ public class TwitterUser extends User implements Filters, Statistics{
 		// store friends data
 		try {
 			Caller.OBJECT_MAPPER.writeValue(Paths.get(getFriendsFileName()).toFile(), this.friends);
+			System.out.println("App: file temporaneo %s.json salvato con successo!".formatted(this.getUsername()));
 		} catch (StreamWriteException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// e.printStackTrace();
 		} catch (DatabindException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// e.printStackTrace();
 		}
 	}
 	
