@@ -10,12 +10,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.exc.StreamWriteException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.twitter.view.Filters;
-import com.twitter.view.Statistics;
 
 import com.twitter.controller.Caller;
 
-public class TwitterUser extends User implements Filters, Statistics{
+public class TwitterUser extends User{
 	
 	public final static String FRIENDS_STORAGE_DIR = "./src/main/resources/data/friends";
 	public final static String FRIENDS_STORAGE_PATH = FRIENDS_STORAGE_DIR + "/";
@@ -45,7 +43,7 @@ public class TwitterUser extends User implements Filters, Statistics{
 		if (new File(getFriendsFileName()).exists()) {
 			initFriendsFromLocal();
 		} else {
-			initFriendsFromRequest();
+			initFriendsFromAPIrequest();
 		}
 	}
 	
@@ -63,7 +61,7 @@ public class TwitterUser extends User implements Filters, Statistics{
 		}
 	}
 
-	private void initFriendsFromRequest() {
+	private void initFriendsFromAPIrequest() {
 		String nextToken = null;
 		do {
 			String friendsData = Caller.followingDataFromUsername(this.getUsername(), nextToken);
@@ -87,7 +85,6 @@ public class TwitterUser extends User implements Filters, Statistics{
 		// store friends data
 		try {
 			Caller.OBJECT_MAPPER.writeValue(Paths.get(getFriendsFileName()).toFile(), this.friends);
-			System.out.println("App: file temporaneo %s.json salvato con successo!".formatted(this.getUsername()));
 		} catch (StreamWriteException e) {
 			// TODO Auto-generated catch block
 			// e.printStackTrace();
@@ -99,98 +96,4 @@ public class TwitterUser extends User implements Filters, Statistics{
 			// e.printStackTrace();
 		}
 	}
-	
-	// statistics START
-	@Override
-	public int friendsFollowersAverageNumber() {
-		if (this.friends_count != 0) {
-			int sum = 0;
-			for (User u : this.friends) {
-				sum += u.getPublic_metrics().getFollowers_count();
-			}
-			return sum / this.friends_count;
-		} else {
-			return 0;
-		}
-	}
-	
-	@Override
-	public int friendsFollowingAverageNumber() {
-		if (this.friends_count != 0) {
-			int sum = 0;
-			for (User u : this.friends) {
-				sum += u.getPublic_metrics().getFollowing_count();
-			}
-			return sum / this.friends_count;
-		} else {
-			return 0;
-		}
-	}
-
-	@Override
-	public float friendsPercentageWithDescription() {
-		if (this.friends_count != 0) {
-			int friendsWithDescription = 0;
-			for (User u : this.friends) {
-				if (!u.getDescription().isBlank()) {
-					friendsWithDescription++;
-				}
-			}
-			return (float)friendsWithDescription / this.friends_count * 100;
-		} else {
-			return 0;
-		}
-	}
-
-	@Override
-	public int friendsTweetsAverageNumber() {
-		if (this.friends_count != 0) {
-			int sum = 0;
-			for (User u : this.friends) {
-				sum += u.getPublic_metrics().getTweet_count();
-			}
-			return sum / this.friends_count;
-		} else {
-			return 0;
-		}
-	}
-	// statistics END
-	
-	// filters START
-	@Override
-	public ArrayList<BasicUser> filterBasedOnFriendsDescription(String word) {
-		ArrayList<BasicUser> fs = new ArrayList<BasicUser>();
-		for (User u : this.friends) {
-			// avoids case sensitivity
-			if (u.getDescription().toLowerCase().contains(word.toLowerCase())) {
-				BasicUser bu = new BasicUser(u.getId(), u.getName(), u.getUsername());
-				fs.add(bu);
-			}
-		}
-		return fs;
-	}
-
-	@Override
-	public ArrayList<User> filterFriendsWithMostFollowers() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<User> filterFriendsWithMostTweets() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean isThisUserMyFriend(String name) {
-		for (User u : this.friends) {
-			// avoids case sensitivity
-			if (u.getName().toLowerCase().equals(name.toLowerCase())) {
-				return true;
-			}
-		}
-		return false;
-	}
-	// filters END
 }

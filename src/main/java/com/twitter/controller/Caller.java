@@ -54,6 +54,7 @@ public class Caller {
 			if (nextToken != null && !nextToken.isBlank()) {
 				path += "&pagination_token=" + nextToken; 
 			}
+			System.out.println(path);
 			return jsonFromUrlString(path);
 		} else {
 			return null;

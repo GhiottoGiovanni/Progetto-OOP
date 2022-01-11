@@ -15,18 +15,26 @@ public class FriendsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FriendsApplication.class, args);
 		
+		// TODO aggiungere un file con le seguenti opzioni
+		/* scegliere se fare il caricamento da locale oppure sempre dall'api
+		 * ...
+		 * */
+		System.out.println("adgoufnvworvnuw");
+		// TODO questo non funziona per qualche motivo
 		Runtime.getRuntime().addShutdownHook(new Thread()
 		{
 		    @Override
 		    public void run()
 		    {
 		        // delete stored data
+		    	System.out.println("adgoufnvw----------orvnuw");
 		    	try {
 					FileUtils.cleanDirectory(Paths.get(TwitterUser.FRIENDS_STORAGE_DIR).toFile());
 					System.out.println("App: file temporanei cancellati con successo!");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					// e.printStackTrace();
+					System.out.println("qualcosa è andato storto nella cancellazione dei file temporanei");
 				}
 		    }
 		});
