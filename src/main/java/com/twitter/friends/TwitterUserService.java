@@ -12,4 +12,6 @@ public interface TwitterUserService {
 	
 	String filterFollowersNumber(String username, int minFollowers);
 	
+	String filterTweetsNumber(String username, int minTweets);
+	
 }

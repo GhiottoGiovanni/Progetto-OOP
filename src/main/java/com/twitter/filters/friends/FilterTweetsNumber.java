@@ -7,18 +7,17 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.twitter.controller.Caller;
 import com.twitter.models.User;
 
-public class FilterByWordInDescription extends FilterUsers{
-	
-	public FilterByWordInDescription(ArrayList<User> friends) {
+public class FilterTweetsNumber extends FilterUsers{
+
+	public FilterTweetsNumber(ArrayList<User> friends) {
 		super(friends);
 	}
 	
-	public String filteredData(String word) {
+	public String filteredData(int minTweets) {
 		ArrayNode data = Caller.OBJECT_MAPPER.createArrayNode();
 		int result_count = 0;
 		for (User u : getFriends()) {
-			// avoids case sensitivity
-			if (u.getDescription().toLowerCase().contains(word.toLowerCase())) {
+			if (u.getPublic_metrics().getTweet_count() >= minTweets) {
 				data.add(Caller.OBJECT_MAPPER.convertValue(u, JsonNode.class));
 				result_count++;
 			}

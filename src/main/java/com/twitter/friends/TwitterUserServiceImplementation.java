@@ -15,6 +15,8 @@ import com.twitter.statistics.friends.*;
 @Service
 public class TwitterUserServiceImplementation implements TwitterUserService{
 	
+	// Autowire TwitterUser tu
+	
 	private TwitterUser initTwitterUser(String username) {
 		String jsonTwitterUserData = Caller.jsonTwitterUserDataFromUsername(username);
 		if (Caller.isNotNullOrEmptyString(jsonTwitterUserData)) {
@@ -87,6 +89,17 @@ public class TwitterUserServiceImplementation implements TwitterUserService{
 		TwitterUser tu = initTwitterUser(username);
 		if (tu != null) {
 			return new FilterFollowersNumber(tu.getFriends()).filteredData(minFollowers);
+		} else {
+			// TODO some error message
+			return "utente twitter non definito";
+		}
+	}
+
+	@Override
+	public String filterTweetsNumber(String username, int minTweets) {
+		TwitterUser tu = initTwitterUser(username);
+		if (tu != null) {
+			return new FilterTweetsNumber(tu.getFriends()).filteredData(minTweets);
 		} else {
 			// TODO some error message
 			return "utente twitter non definito";
