@@ -10,16 +10,14 @@ import com.twitter.controller.Caller;
 import com.twitter.models.BasicUser;
 import com.twitter.models.User;
 
-public class FilterByWordInDescription extends Filter{
+public class FilterByWordInDescription extends FilterUsers{
 	
 	public FilterByWordInDescription(ArrayList<User> friends) {
 		super(friends);
 	}
 	
 	public String filteredData(String word) {
-		ObjectNode root = Caller.OBJECT_MAPPER.createObjectNode();
 		ArrayNode data = Caller.OBJECT_MAPPER.createArrayNode();
-		ObjectNode meta = Caller.OBJECT_MAPPER.createObjectNode();
 		int result_count = 0;
 		for (User u : getFriends()) {
 			// avoids case sensitivity
@@ -29,14 +27,6 @@ public class FilterByWordInDescription extends Filter{
 				result_count++;
 			}
 		}
-		meta.put("result_count", result_count);
-		root.set("data", data);
-		root.set("meta", meta);
-		try {
-			return Caller.OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(root);
-		} catch (JsonProcessingException e) {
-			// TODO some error message
-			return "problema con il parsing";
-		}
+		return structureData(data, result_count);
 	}
 }

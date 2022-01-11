@@ -10,4 +10,6 @@ public interface TwitterUserService {
 	
 	String filterIsYourFriend(String username, List<String> friendsNames);
 	
+	String filterFollowersNumber(String username, int minFollowers);
+	
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.twitter.models.User;
 
-public abstract class Filter {
+abstract class Filter {
 	private ArrayList<User> friends = new ArrayList<User>();
 	private int friendsCount;
 	
@@ -28,4 +28,6 @@ public abstract class Filter {
 		this.friends = friends;
 		this.setFriendsCount();
 	}
+	
+	// TODO aggiungere un metodo astratto "filteredData" che restituisca una Stringa ma abbia tipo di parametri variabile
 }

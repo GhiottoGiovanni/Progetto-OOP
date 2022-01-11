@@ -82,5 +82,16 @@ public class TwitterUserServiceImplementation implements TwitterUserService{
 		}
 	}
 
+	@Override
+	public String filterFollowersNumber(String username, int minFollowers) {
+		TwitterUser tu = initTwitterUser(username);
+		if (tu != null) {
+			return new FilterFollowersNumber(tu.getFriends()).filteredData(minFollowers);
+		} else {
+			// TODO some error message
+			return "utente twitter non definito";
+		}
+	}
+
 }
 
