@@ -1,12 +1,15 @@
 package com.twitter.controller;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.Scanner;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -16,6 +19,23 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class Caller {
 	public static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 	private static final String[] USER_FIELDS = {"description", "location", "verified", "public_metrics"};
+	private static final String BEARER_FILENAME = "./src/main/resources/key/bearer.txt";
+	private static final String BEARER = getBearer();
+	
+	private static String getBearer() {
+		try {
+			File bearerFile = new File(BEARER_FILENAME);
+		    Scanner scanner = new Scanner(bearerFile);
+		    String bearer = scanner.nextLine();
+		    scanner.close();
+		    return bearer;
+		} catch (FileNotFoundException e) {
+			// TODO print some message
+			System.out.println("MESSAGGIO ERRORE: Problema con l'ottenimento del Bearer Token");
+		    e.printStackTrace();
+		    return null;
+		}
+	}
 	
 	public static String jsonTwitterUserDataFromUsername(String username) {
 		String jsonData = jsonUserDataFromUsername(username, Caller.USER_FIELDS);	
@@ -65,7 +85,7 @@ public class Caller {
 			URL url = new URL(urlString);
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 			// TODO get the bearer code from an xml file
-			urlConnection.setRequestProperty("Authorization", "Bearer " + "AAAAAAAAAAAAAAAAAAAAAJjSWwEAAAAAdLSKaXAoGu%2BxVx5nO1W3dVxpdz0%3DQLVtGkBY0JOvBECcNk7o3ZVDyZJob1G6M7jHKP9xmupCYHOad3");
+			urlConnection.setRequestProperty("Authorization", "Bearer " + BEARER);
 			urlConnection.setRequestMethod("GET");
 			
 			String line = "";
