@@ -16,7 +16,8 @@ import com.twitter.controller.Caller;
 public class TwitterUser extends User{
 	
 	public final static String FRIENDS_STORAGE_DIR = "./src/main/resources/data/friends";
-	public final static String FRIENDS_STORAGE_PATH = FRIENDS_STORAGE_DIR + "/";
+	private final static String FRIENDS_STORAGE_PATH = FRIENDS_STORAGE_DIR + "/";
+	public final static boolean STORE_LOCALY = true;
 	
 	private ArrayList<User>	friends = new ArrayList<User>();
 	private int friends_count;
@@ -40,7 +41,7 @@ public class TwitterUser extends User{
 	}
 	
 	public void initFriends() {
-		if (new File(getFriendsFileName()).exists()) {
+		if (new File(getFriendsFileName()).exists() && STORE_LOCALY) {
 			initFriendsFromLocal();
 		} else {
 			initFriendsFromAPIrequest();
@@ -83,18 +84,20 @@ public class TwitterUser extends User{
 		this.setFriends_count(this.friends.size());
 		
 		// store friends data
-		try {
-			Caller.OBJECT_MAPPER.writeValue(Paths.get(getFriendsFileName()).toFile(), this.friends);
-			System.out.println("App: file temporaneo " + this.getUsername() + ".json salvato!");
-		} catch (StreamWriteException e) {
-			// TODO Auto-generated catch block
-			// e.printStackTrace();
-		} catch (DatabindException e) {
-			// TODO Auto-generated catch block
-			// e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			// e.printStackTrace();
+		if (STORE_LOCALY) {
+			try {
+				Caller.OBJECT_MAPPER.writeValue(Paths.get(getFriendsFileName()).toFile(), this.friends);
+				System.out.println("App: file temporaneo " + this.getUsername() + ".json salvato!");
+			} catch (StreamWriteException e) {
+				// TODO Auto-generated catch block
+				// e.printStackTrace();
+			} catch (DatabindException e) {
+				// TODO Auto-generated catch block
+				// e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				// e.printStackTrace();
+			}
 		}
 	}
 }
