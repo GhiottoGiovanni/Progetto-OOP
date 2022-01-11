@@ -85,6 +85,7 @@ public class TwitterUser extends User{
 		// store friends data
 		try {
 			Caller.OBJECT_MAPPER.writeValue(Paths.get(getFriendsFileName()).toFile(), this.friends);
+			System.out.println("App: file temporaneo " + this.getUsername() + ".json salvato!");
 		} catch (StreamWriteException e) {
 			// TODO Auto-generated catch block
 			// e.printStackTrace();

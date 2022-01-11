@@ -8,12 +8,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import com.twitter.controller.Caller;
-import com.twitter.filters.friends.*;
 import com.twitter.models.TwitterUser;
-import com.twitter.statistics.friends.FollowersAverageNumber;
-import com.twitter.statistics.friends.FollowingAverageNumber;
-import com.twitter.statistics.friends.PercentageWithDescription;
-import com.twitter.statistics.friends.TweetsAverageNumber;
+import com.twitter.filters.friends.*;
+import com.twitter.statistics.friends.*;
 
 @Service
 public class TwitterUserServiceImplementation implements TwitterUserService{

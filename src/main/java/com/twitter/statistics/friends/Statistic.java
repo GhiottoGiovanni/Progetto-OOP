@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.twitter.models.User;
 
-public class Statistic {
+public abstract class Statistic {
 	private ArrayList<User> friends = new ArrayList<User>();
 	private int friendsCount;
 	

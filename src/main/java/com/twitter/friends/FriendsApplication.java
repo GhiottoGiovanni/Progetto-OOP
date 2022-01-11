@@ -19,15 +19,14 @@ public class FriendsApplication {
 		/* scegliere se fare il caricamento da locale oppure sempre dall'api
 		 * ...
 		 * */
-		System.out.println("adgoufnvworvnuw");
-		// TODO questo non funziona per qualche motivo
+		
+		// AFFINCHE' IL CODICE SOTTO VENGA ESEGUITO E' NECESSARIO LANCIARE L'APPLICAZIONE COME SPRING BOOT APPLICATION
 		Runtime.getRuntime().addShutdownHook(new Thread()
 		{
 		    @Override
 		    public void run()
 		    {
 		        // delete stored data
-		    	System.out.println("adgoufnvw----------orvnuw");
 		    	try {
 					FileUtils.cleanDirectory(Paths.get(TwitterUser.FRIENDS_STORAGE_DIR).toFile());
 					System.out.println("App: file temporanei cancellati con successo!");
