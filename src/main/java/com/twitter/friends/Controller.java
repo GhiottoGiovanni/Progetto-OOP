@@ -36,7 +36,7 @@ public class Controller {
 	}
 	
 	@GetMapping("/filter_tweets_number")
-	public ResponseEntity<String> filterTweetsNumber(@RequestParam(value = "username") String username, @RequestParam(value = "min_followers") int minTweets) {
+	public ResponseEntity<String> filterTweetsNumber(@RequestParam(value = "username") String username, @RequestParam(value = "min_tweets") int minTweets) {
 		return new ResponseEntity<String>(tus.filterTweetsNumber(username, minTweets), HttpStatus.OK);
 	}
 }
