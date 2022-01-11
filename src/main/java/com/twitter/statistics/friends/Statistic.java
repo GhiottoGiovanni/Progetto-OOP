@@ -4,10 +4,21 @@ import java.util.ArrayList;
 
 import com.twitter.models.User;
 
+/**
+ * Classe astratta delle statistiche
+ * @author Giovanni Ghiotto
+ * @author Mihail Bobeica
+ * @version 1.0
+ */
+
 public abstract class Statistic {
 	private ArrayList<User> friends = new ArrayList<User>();
 	private int friendsCount;
 	
+	/**
+	 * Inizializza la lista degli amici
+	 * @param friends Lista di amici
+	 */
 	Statistic(ArrayList<User> friends) {
 		setFriends(friends);
 	}
@@ -34,6 +45,6 @@ public abstract class Statistic {
 	}
 	
 	double getDoubleValue() {
-		return 0f;
+		return 0d;
 	}
 }

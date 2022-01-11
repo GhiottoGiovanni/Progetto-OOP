@@ -16,8 +16,10 @@ abstract class FilterUsers extends Filter{
 	
 	String structureData(ArrayNode data, int result_count) {
 		ObjectNode root = Caller.OBJECT_MAPPER.createObjectNode();
+		
 		ObjectNode meta = Caller.OBJECT_MAPPER.createObjectNode();
 		meta.put("result_count", result_count);
+		
 		root.set("data", data);
 		root.set("meta", meta);
 		try {
