@@ -4,6 +4,12 @@ import java.util.ArrayList;
 
 import com.twitter.models.User;
 
+/**
+ * Classe filtro
+ * @author Giovanni Ghiotto
+ * @author Mihail Bobeica
+ * @version 1.0
+ */
 abstract class Filter {
 	private ArrayList<User> friends = new ArrayList<User>();
 	private int friendsCount;

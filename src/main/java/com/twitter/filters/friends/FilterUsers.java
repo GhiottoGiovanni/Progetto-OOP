@@ -8,12 +8,26 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.twitter.controller.Caller;
 import com.twitter.models.User;
 
+/**
+ * Classe che eredita da {@link Filter}. Contiene metodo della costruzione della struttura dove saranno inseriti i dati degli utenti.
+ * @author Giovanni Ghiotto
+ * @author Mihail Bobeica
+ * @version 1.0
+ */
+
 abstract class FilterUsers extends Filter{
+	/**
+	 * Inizializza la lista degli amici
+	 * @param friends Lista di amici
+	 */
 	
 	public FilterUsers(ArrayList<User> friends) {
 		super(friends);
 	}
 	
+	/**
+	 * @return Ritorna i dati strutturati.
+	 */
 	String structureData(ArrayNode data, int result_count) {
 		ObjectNode root = Caller.OBJECT_MAPPER.createObjectNode();
 		

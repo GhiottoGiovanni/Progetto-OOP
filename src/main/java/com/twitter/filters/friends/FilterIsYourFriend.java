@@ -8,12 +8,25 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.twitter.controller.Caller;
 import com.twitter.models.User;
 
-public class FilterIsYourFriend extends Filter{
+/**
+ * Classe che eredita da {@link Filter}. Controlla se un determinato utente è tuo amico.
+ * @author Giovanni Ghiotto
+ * @author Mihail Bobeica
+ * @version 1.0
+ */
 
+public class FilterIsYourFriend extends Filter{
+	/**
+	 * Inizializza la lista degli amici
+	 * @param friends Lista di amici
+	 */
 	public FilterIsYourFriend(ArrayList<User> friends) {
 		super(friends);
 	}
 	
+	/**
+	 * @return Ritorna se un utente selezionato è tuo amico.
+	 */
 	private boolean isFollowing(String friendName) {
 		for (User u : getFriends()) {
 			// avoids case sensitivity
