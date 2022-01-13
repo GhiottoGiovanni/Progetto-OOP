@@ -1,8 +1,23 @@
 package com.twitter.models;
 
+/**
+ * <b>Classe</b> utente di base
+ * @author Mihail Bobeica
+ * @version 1.0
+ */
+
 public class BasicUser {
+	/**
+	 * ID dell'utente
+	 */
 	private String id;
+	/**
+	 * Nome dell'utente
+	 */
 	private String name;
+	/**
+	 * Nome identificativo dell'utente
+	 */
 	private String username;
 	
 	// TODO add constructors if needed

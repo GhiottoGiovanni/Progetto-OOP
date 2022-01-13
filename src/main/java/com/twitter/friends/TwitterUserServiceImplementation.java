@@ -6,9 +6,8 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
-import com.twitter.controller.Caller;
 import com.twitter.models.TwitterUser;
+import com.twitter.APIcaller.Caller;
 import com.twitter.filters.friends.*;
 import com.twitter.statistics.friends.*;
 

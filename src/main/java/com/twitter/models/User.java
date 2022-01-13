@@ -1,9 +1,28 @@
 package com.twitter.models;
 
+/**
+ * <b>Classe</b> utente che eredita da {@link BasicUser}.
+ * Rispetto alla classe {@link BasicUser} contiene una serie di informazioni riguardanti il profilo dell'utente.
+ * @author Mihail Bobeica
+ * @version 1.0
+ */
+
 public class User extends BasicUser{
+	/**
+	 * Descrizione del profilo dell'utente
+	 */
 	private String description;
+	/**
+	 * Posizione indicata nel profilo dell'utente
+	 */
 	private String location;
+	/**
+	 * Indica se l'utente è un utente Twitter verificato
+	 */
 	private boolean verified;
+	/**
+	 * Contiene dati riguardanti l'attività dell'utente
+	 */
 	private PublicMetrics public_metrics;
 	
 	// TODO add constructors if needed
