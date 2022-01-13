@@ -9,11 +9,22 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.twitter.models.TwitterUser;
 
+/**
+ * Classe principale
+ * @author Giovanni Ghiotto
+ * @author Mihail Bobeica
+ * @version 1.0
+ */
+
 @SpringBootApplication
 public class FriendsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FriendsApplication.class, args);
+		//TODO Vedere se funziona il commento javadoc
+		/**
+		 * Cancellazione dei file temporanei contenenti i dati degli amici di un utente.
+		 */
 		
 		// AFFINCHE' IL CODICE SOTTO VENGA ESEGUITO E' NECESSARIO LANCIARE L'APPLICAZIONE COME SPRING BOOT APPLICATION
 		if (TwitterUser.STORE_LOCALY) {
