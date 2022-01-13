@@ -1,5 +1,12 @@
 package com.twitter.models;
 
+/**
+ * <b>Classe</b> contenente informazioni riguardanti l'attività di un utente.
+ * @author Giovanni Ghiotto
+ * @author Mihail Bobeica
+ * @version 1.0
+ */
+
 public class PublicMetrics {
 	private int followers_count;
 	private int following_count;

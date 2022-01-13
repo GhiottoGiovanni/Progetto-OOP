@@ -15,6 +15,7 @@ import com.twitter.APIcaller.Caller;
 /**
  * <b>Classe</b> utente che eredita da {@link User}.
  * Rispetto alla classe {@link User} contiene una lista di <i>friends</i> (utenti che l'utente segue).
+ * @author Giovanni Ghiotto
  * @author Mihail Bobeica
  * @version 1.0
  */

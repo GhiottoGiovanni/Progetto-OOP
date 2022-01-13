@@ -3,6 +3,7 @@ package com.twitter.models;
 /**
  * <b>Classe</b> utente che eredita da {@link BasicUser}.
  * Rispetto alla classe {@link BasicUser} contiene una serie di informazioni riguardanti il profilo dell'utente.
+ * @author Giovanni Ghiotto
  * @author Mihail Bobeica
  * @version 1.0
  */

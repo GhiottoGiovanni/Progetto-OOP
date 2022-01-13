@@ -2,6 +2,7 @@ package com.twitter.models;
 
 /**
  * <b>Classe</b> utente di base
+ * @author Giovanni Ghiotto
  * @author Mihail Bobeica
  * @version 1.0
  */
