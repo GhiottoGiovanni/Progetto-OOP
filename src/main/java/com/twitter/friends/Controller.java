@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Classe controller che gestisce le chiamate  
+ * <b>Classe</b> controller che gestisce le chiamate  
  * @author Giovanni Ghiotto
  * @author Mihail Bobeica
  * @version 1.0
