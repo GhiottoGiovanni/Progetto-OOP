@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.twitter.models.TwitterUser;
 
 /**
- * Classe principale
+ * <b>Classe</b> principale
  * @author Giovanni Ghiotto
  * @author Mihail Bobeica
  * @version 1.0
