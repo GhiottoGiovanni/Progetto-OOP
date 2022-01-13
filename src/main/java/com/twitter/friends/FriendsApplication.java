@@ -21,11 +21,13 @@ public class FriendsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FriendsApplication.class, args);
-		//TODO Vedere se funziona il commento javadoc
-		/**
-		 * Cancellazione dei file temporanei contenenti i dati degli amici di un utente.
-		 */
-		
+		deleteTemporaryFiles();
+	}
+	
+	/**
+	 * Rimozione dei file temporanei contenenti i dati degli amici di un utente.
+	 */
+	public static void deleteTemporaryFiles() {
 		// AFFINCHE' IL CODICE SOTTO VENGA ESEGUITO E' NECESSARIO LANCIARE L'APPLICAZIONE COME SPRING BOOT APPLICATION
 		if (TwitterUser.STORE_LOCALY) {
 			Runtime.getRuntime().addShutdownHook(new Thread()
