@@ -16,12 +16,37 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * Classe che gestisce le chiamate all'API di Twitter.
+ * @author Giovanni Ghiotto
+ * @author Mihail Bobeica
+ * @version 1.0
+ */
+
 public class Caller {
+	/**
+	 * Oggetto che fornisce le funzionalità per leggere e scrivere il Json.
+	 */
 	public static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+	
+	/**
+	 * Campi prelevati dal profilo dell'utente.
+	 */
 	private static final String[] USER_FIELDS = {"description", "location", "verified", "public_metrics"};
+	
+	/**
+	 * Nome completo del file contenente il bearer token (chiave di autenticazione).
+	 */
 	private static final String BEARER_FILENAME = "./src/main/resources/key/bearer.txt";
+	
+	/**
+	 * Bearer token (chiave di autenticazione).
+	 */
 	private static final String BEARER = getBearer();
 	
+	/**
+	 * @return Preleva da file locale il bearer token.
+	 */
 	private static String getBearer() {
 		try {
 			File bearerFile = new File(BEARER_FILENAME);
@@ -37,6 +62,11 @@ public class Caller {
 		}
 	}
 	
+	/**
+	 * <b>Metodo</b> che preleva i dati di un utente dall'API Twitter.
+	 * @param username Nome identificativo dell'account Twitter.
+	 * @return Dati dell'utente in formato stringa Json.
+	 */
 	public static String jsonTwitterUserDataFromUsername(String username) {
 		String jsonData = jsonUserDataFromUsername(username, Caller.USER_FIELDS);	
 		if (isNotNullOrEmptyString(jsonData)) {
@@ -57,6 +87,12 @@ public class Caller {
 		}
 	}
 	
+	/**
+	 * <b>Metodo</b> che preleva i dati degli amici di un utente dall'API Twitter.
+	 * @param username Nome identificativo dell'account Twitter.
+	 * @param nextToken Token identificativo per i risultati della pagina successiva.
+	 * @return Dati degli amici dell'utente in formato stringa Json.
+	 */
 	public static String followingDataFromUsername(String username, String nextToken) {
 		int maxResults = 100;
 		String endpoint = "following";
@@ -152,6 +188,11 @@ public class Caller {
 		return userFieldsUrlFormat;
 	}
 	
+	/**
+	 * Controlla se una stringa è vuota o null.
+	 * @param string Stringa da analizzare.
+	 * @return Ritorna <code>true</code> se la stringa contiene caratteri.
+	 */
 	public static boolean isNotNullOrEmptyString(String string) {
 		if (string == null || string.isEmpty() || string.isBlank()) {
 			return false;
