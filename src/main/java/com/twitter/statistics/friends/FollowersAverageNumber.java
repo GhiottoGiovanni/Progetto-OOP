@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.twitter.models.User;
 /**
- * Classe che eredita da {@link Statistic}. Calcolo del numero medio dei follower degli amici.
+ * <b>Classe</b> che eredita da {@link Statistic}. Calcolo del numero medio dei follower degli amici.
  * @author Giovanni Ghiotto
  * @author Mihail Bobeica
  * @version 1.0
