@@ -15,7 +15,7 @@ import com.twitter.models.User;
  * @version 1.0
  */
 
-abstract class FilterUsers extends Filter{
+public abstract class FilterUsers extends Filter{
 	/**
 	 * Inizializza la lista degli amici
 	 * @param friends Lista di amici
@@ -28,7 +28,7 @@ abstract class FilterUsers extends Filter{
 	/**
 	 * @return Ritorna i dati strutturati.
 	 */
-	String structureData(ArrayNode data, int result_count) {
+	public static String structureData(ArrayNode data, int result_count) {
 		ObjectNode root = Caller.OBJECT_MAPPER.createObjectNode();
 		
 		ObjectNode meta = Caller.OBJECT_MAPPER.createObjectNode();

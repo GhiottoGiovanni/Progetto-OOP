@@ -50,4 +50,10 @@ public interface TwitterUserService {
 	 */
 	String filterTweetsNumber(String username, int minTweets);
 	
+	/**
+	 * <b>Intestazione</b> del metodo che mostra la lista di tutti gli amici.
+	 * @param username Nome identificativo dell'account Twitter.
+	 * @return Lista completa degli amici.
+	 */
+	String getAllFriends(String username);
 }

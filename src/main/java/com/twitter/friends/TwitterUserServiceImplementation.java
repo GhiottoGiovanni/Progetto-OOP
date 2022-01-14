@@ -5,8 +5,11 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.twitter.models.TwitterUser;
+import com.twitter.models.User;
 import com.twitter.APIcaller.Caller;
 import com.twitter.exceptions.NotExistingAccountException;
 import com.twitter.filters.friends.*;
@@ -102,6 +105,22 @@ public class TwitterUserServiceImplementation implements TwitterUserService{
 		try {
 			TwitterUser tu = initTwitterUser(username);
 			return new FilterTweetsNumber(tu.getFriends()).filteredData(minTweets);
+		} catch (NotExistingAccountException e) {
+			e.toString();
+			e.printStackTrace();
+			return e.toString();
+		}
+	}
+
+	@Override
+	public String getAllFriends(String username) {
+		try {
+			TwitterUser tu = initTwitterUser(username);
+			ArrayNode data = Caller.OBJECT_MAPPER.createArrayNode();
+			for (User u : tu.getFriends()) {
+				data.add(Caller.OBJECT_MAPPER.convertValue(u, JsonNode.class));
+			}
+			return FilterUsers.structureData(data, tu.getFriends_count());
 		} catch (NotExistingAccountException e) {
 			e.toString();
 			e.printStackTrace();

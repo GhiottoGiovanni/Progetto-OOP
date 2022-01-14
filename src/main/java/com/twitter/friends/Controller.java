@@ -24,7 +24,7 @@ public class Controller {
 	
 	/**
 	 * <b>Rotta</b> per visualizzare le statistiche di un utente ricercato.
-	 * @param username Parola chiave per cercare le statistiche dell'utente.
+	 * @param username Nome identificativo dell'account Twitter.
 	 * @return Lista delle statitische dell'utente ricercato.
 	 */
 	@GetMapping("/stats")	
@@ -34,7 +34,7 @@ public class Controller {
 	
 	/**
 	 * <b>Rotta</b> per visualizzare la lisat di amici di un utente cercato con una specifica parola nella descizione del profilo.
-	 * @param username Parola chiave per cercare l'utente.
+	 * @param username Nome identificativo dell'account Twitter.
 	 * @param word Parola chiave specifica da cercare nella descizione degli amici.
 	 * @return Lista filtrata.
 	 */
@@ -45,7 +45,7 @@ public class Controller {
 	
 	/**
 	 * <b>Rotta</b> per visualizzare se degli utenti sono amici del profilo selezionato.
-	 * @param username Parola chiave per cercare l'utente.
+	 * @param username Nome identificativo dell'account Twitter.
 	 * @param friendsNames Lista di utenti da ricercare nella lista di amici.
 	 * @return Lista filtrata.
 	 */
@@ -56,7 +56,7 @@ public class Controller {
 	
 	/**
 	 * <b>Rotta</b> per visualizzare la lista di amici con un numero minimo di follower.
-	 * @param username Parola chiave per cercare l'utente.
+	 * @param username Nome identificativo dell'account Twitter.
 	 * @param minFollowers Numero minimo di follower.
 	 * @return Lista filtrata.
 	 */
@@ -67,12 +67,22 @@ public class Controller {
 	
 	/**
 	 * <b>Rotta</b> per visualizzare la lista di amici con un numero minimo di tweet.
-	 * @param username Parola chiave per cercare l'utente.
+	 * @param username Nome identificativo dell'account Twitter.
 	 * @param minTweets Numero minimo di tweet.
 	 * @return Lista filtrata.
 	 */
 	@GetMapping("/filter_tweets_number")
 	public ResponseEntity<String> filterTweetsNumber(@RequestParam(value = "username") String username, @RequestParam(value = "min_tweets") int minTweets) {
 		return new ResponseEntity<String>(tus.filterTweetsNumber(username, minTweets), HttpStatus.OK);
+	}
+	
+	/**
+	 * <b>Rotta</b> per visualizzare la lista completa di amici.
+	 * @param username Nome identificativo dell'account Twitter.
+	 * @return Lista completa degli amici.
+	 */
+	@GetMapping("/get_all_friends")
+	public ResponseEntity<String> getAllFriends(@RequestParam(value = "username") String username){
+		return new ResponseEntity<String>(tus.getAllFriends(username), HttpStatus.OK);
 	}
 }
