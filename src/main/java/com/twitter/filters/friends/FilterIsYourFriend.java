@@ -16,7 +16,7 @@ import com.twitter.models.User;
  * @version 1.0
  */
 
-public class FilterIsYourFriend extends Filter{
+public class FilterIsYourFriend extends FilterUsers{
 	/**
 	 * Inizializza la lista degli amici
 	 * @param friends Lista di amici
@@ -39,19 +39,15 @@ public class FilterIsYourFriend extends Filter{
 	}
 	
 	public String filteredData(List<String> friendsNames) {
-		ArrayNode lista = Caller.OBJECT_MAPPER.createArrayNode();
+		ArrayNode data = Caller.OBJECT_MAPPER.createArrayNode();
+		int result_count = 0;
 		for (String friendName : friendsNames) {
 			ObjectNode node = Caller.OBJECT_MAPPER.createObjectNode();
 			node.put("name", friendName);
 			node.put("following", isFollowing(friendName));
-			lista.add(node);
+			data.add(node);
+			result_count++;
 		}
-		try {
-			return Caller.OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(lista);
-		} catch (JsonProcessingException e) {
-			e.toString();
-			e.printStackTrace();
-			return e.toString();
-		}
+		return structureData(data, result_count);
 	}
 }
