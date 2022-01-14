@@ -14,8 +14,6 @@ import com.twitter.statistics.friends.*;
 @Service
 public class TwitterUserServiceImplementation implements TwitterUserService{
 	
-	// Autowire TwitterUser tu
-	
 	private TwitterUser initTwitterUser(String username) {
 		String jsonTwitterUserData = Caller.jsonTwitterUserDataFromUsername(username);
 		if (Caller.isNotNullOrEmptyString(jsonTwitterUserData)) {
@@ -51,12 +49,12 @@ public class TwitterUserServiceImplementation implements TwitterUserService{
 			try {
 				return Caller.OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(root);
 			} catch (JsonProcessingException e) {
-				// TODO some error message
-				return "problema con il parsing";
+				e.toString();
+				e.printStackTrace();
+				return e.toString();
 			}
 		} else {
-			// TODO some error message
-			return "utente twitter non definito";
+			return "Non esiste nessun account Twitter con il seguente nome identificativo: " + username;
 		}
 	}
 
@@ -66,8 +64,7 @@ public class TwitterUserServiceImplementation implements TwitterUserService{
 		if (tu != null) {
 			return new FilterByWordInDescription(tu.getFriends()).filteredData(word);
 		} else {
-			// TODO some error message
-			return "utente twitter non definito";
+			return "Non esiste nessun account Twitter con il seguente nome identificativo: " + username;
 		}
 		
 	}
@@ -78,8 +75,7 @@ public class TwitterUserServiceImplementation implements TwitterUserService{
 		if (tu != null) {
 			return new FilterIsYourFriend(tu.getFriends()).filteredData(friendsNames);
 		} else {
-			// TODO some error message
-			return "utente twitter non definito";
+			return "Non esiste nessun account Twitter con il seguente nome identificativo: " + username;
 		}
 	}
 
@@ -89,8 +85,7 @@ public class TwitterUserServiceImplementation implements TwitterUserService{
 		if (tu != null) {
 			return new FilterFollowersNumber(tu.getFriends()).filteredData(minFollowers);
 		} else {
-			// TODO some error message
-			return "utente twitter non definito";
+			return "Non esiste nessun account Twitter con il seguente nome identificativo: " + username;
 		}
 	}
 
@@ -100,8 +95,7 @@ public class TwitterUserServiceImplementation implements TwitterUserService{
 		if (tu != null) {
 			return new FilterTweetsNumber(tu.getFriends()).filteredData(minTweets);
 		} else {
-			// TODO some error message
-			return "utente twitter non definito";
+			return "Non esiste nessun account Twitter con il seguente nome identificativo: " + username;
 		}
 	}
 

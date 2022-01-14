@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.twitter.APIcaller.Caller;
 import com.twitter.models.User;
@@ -39,14 +40,19 @@ public class FilterIsYourFriend extends Filter{
 	
 	public String filteredData(List<String> friendsNames) {
 		ObjectNode root = Caller.OBJECT_MAPPER.createObjectNode();
+		ArrayNode array = Caller.OBJECT_MAPPER.createArrayNode();
 		for (String friendName : friendsNames) {
-			root.put("following_%s".formatted(friendName), isFollowing(friendName));
+			ObjectNode node = Caller.OBJECT_MAPPER.createObjectNode();
+			node.put("name", friendName);
+			node.put("following", isFollowing(friendName));
+			array.add(node);
 		}
 		try {
 			return Caller.OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(root);
 		} catch (JsonProcessingException e) {
-			// TODO some error message
-			return "problema con il parsing";
+			e.toString();
+			e.printStackTrace();
+			return e.toString();
 		}
 	}
 }

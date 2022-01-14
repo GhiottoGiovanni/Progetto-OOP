@@ -38,11 +38,11 @@ public class FriendsApplication {
 			        // delete stored data
 			    	try {
 						FileUtils.cleanDirectory(Paths.get(TwitterUser.FRIENDS_STORAGE_DIR).toFile());
-						System.out.println("App: file temporanei cancellati con successo!");
+						System.out.println("APP: file temporanei cancellati con successo!");
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						// e.printStackTrace();
 						System.out.println("qualcosa è andato storto nella cancellazione dei file temporanei");
+						e.toString();
+						e.printStackTrace();
 					}
 			    }
 			});

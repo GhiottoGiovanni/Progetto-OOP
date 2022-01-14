@@ -39,8 +39,9 @@ abstract class FilterUsers extends Filter{
 		try {
 			return Caller.OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(root);
 		} catch (JsonProcessingException e) {
-			// TODO some error message
-			return "problema con il parsing";
+			e.toString();
+			e.printStackTrace();
+			return e.toString();
 		}
 	}
 }

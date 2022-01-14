@@ -76,6 +76,8 @@ public class TwitterUser extends User{
 	 * <p>Se il file json esiste e se {@link STORE_LOCALY} è <code>true</code> carica i dati dei <i>friends</i> da locale, altrimenti li carica tramite una chiamata alla Twitter API.
 	 */
 	public void initFriends() {
+
+		System.out.println(this.getClass().getSimpleName() + ".");
 		if (new File(getFriendsFileName()).exists() && STORE_LOCALY) {
 			initFriendsFromLocal();
 		} else {
@@ -89,11 +91,11 @@ public class TwitterUser extends User{
 			Collections.addAll(this.friends, friends);
 			this.setFriends_count(this.friends.size());
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			// e.printStackTrace();
+			e.toString();
+			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			// e.printStackTrace();
+			e.toString();
+			e.printStackTrace();
 		}
 	}
 	
@@ -113,6 +115,7 @@ public class TwitterUser extends User{
 					this.friends.add(u);
 				}
 			} catch (JsonProcessingException e) {
+				e.toString();
 				e.printStackTrace();
 			}
 		} while (nextToken != null && !nextToken.isBlank());
@@ -122,16 +125,16 @@ public class TwitterUser extends User{
 		if (STORE_LOCALY) {
 			try {
 				Caller.OBJECT_MAPPER.writeValue(Paths.get(getFriendsFileName()).toFile(), this.friends);
-				System.out.println("App: file temporaneo " + this.getUsername() + ".json salvato!");
+				System.out.println("APP: file temporaneo " + this.getUsername() + ".json salvato!");
 			} catch (StreamWriteException e) {
-				// TODO Auto-generated catch block
-				// e.printStackTrace();
+				e.toString();
+				e.printStackTrace();
 			} catch (DatabindException e) {
-				// TODO Auto-generated catch block
-				// e.printStackTrace();
+				e.toString();
+				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				// e.printStackTrace();
+				e.toString();
+				e.printStackTrace();
 			}
 		}
 	}

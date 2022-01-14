@@ -55,9 +55,8 @@ public class Caller {
 		    scanner.close();
 		    return bearer;
 		} catch (FileNotFoundException e) {
-			// TODO print some message
-			System.out.println("MESSAGGIO ERRORE: Problema con l'ottenimento del Bearer Token");
-		    e.printStackTrace();
+			e.toString();
+			e.printStackTrace();
 		    return null;
 		}
 	}
@@ -74,12 +73,12 @@ public class Caller {
 				JsonNode jn = Caller.OBJECT_MAPPER.readTree(jsonData);
 				return jn.at("/data").toString();
 			} catch (JsonMappingException e) {
-				// TODO Auto-generated catch block
-				// e.printStackTrace();
+				e.toString();
+				e.printStackTrace();
 				return null;
 			} catch (JsonProcessingException e) {
-				// TODO Auto-generated catch block
-				// e.printStackTrace();
+				e.toString();
+				e.printStackTrace();
 				return null;
 			}
 		} else {
@@ -134,16 +133,16 @@ public class Caller {
 			br.close();
 			return sb.toString();
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			// e.printStackTrace();
+			e.toString();
+			e.printStackTrace();
 			return null;
 		} catch (ProtocolException e) {
-			// TODO Auto-generated catch block
-			// e.printStackTrace();
+			e.toString();
+			e.printStackTrace();
 			return null;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			// e.printStackTrace();
+			e.toString();
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -160,12 +159,12 @@ public class Caller {
 				JsonNode jn = Caller.OBJECT_MAPPER.readTree(jsonData);
 				return jn.at("/data/id").asText();
 			} catch (JsonMappingException e) {
-				// TODO Auto-generated catch block
-				// e.printStackTrace();
+				e.toString();
+				e.printStackTrace();
 				return null;
 			} catch (JsonProcessingException e) {
-				// TODO Auto-generated catch block
-				// e.printStackTrace();
+				e.toString();
+				e.printStackTrace();
 				return null;
 			}
 		} else {
