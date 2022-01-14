@@ -93,7 +93,7 @@ public class Caller {
 	 * @return Dati degli amici dell'utente in formato stringa Json.
 	 */
 	public static String followingDataFromUsername(String username, String nextToken) {
-		int maxResults = 100;
+		int maxResults = 1000;
 		String endpoint = "following";
 		return dataFromUsername(username, endpoint, maxResults, Caller.USER_FIELDS, nextToken);
 		// returns null if bad request

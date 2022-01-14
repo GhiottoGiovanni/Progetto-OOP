@@ -8,13 +8,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.twitter.models.TwitterUser;
 import com.twitter.APIcaller.Caller;
+import com.twitter.exceptions.NotExistingAccountException;
 import com.twitter.filters.friends.*;
 import com.twitter.statistics.friends.*;
 
 @Service
 public class TwitterUserServiceImplementation implements TwitterUserService{
 	
-	private TwitterUser initTwitterUser(String username) {
+	private TwitterUser initTwitterUser(String username) throws NotExistingAccountException {
 		String jsonTwitterUserData = Caller.jsonTwitterUserDataFromUsername(username);
 		if (Caller.isNotNullOrEmptyString(jsonTwitterUserData)) {
 			try {
@@ -25,13 +26,13 @@ public class TwitterUserServiceImplementation implements TwitterUserService{
 				return null;
 			}
 		} else {
-			return null;
+			throw new NotExistingAccountException(username);
 		}
 	}
 	
 	public String getStatistics(String username) {
-		TwitterUser tu = initTwitterUser(username);
-		if (tu != null) {
+		try {
+			TwitterUser tu = initTwitterUser(username);
 			ObjectNode root = Caller.OBJECT_MAPPER.createObjectNode();
 			
 			int fsan = new FollowersAverageNumber(tu.getFriends()).getIntValue();
@@ -53,51 +54,59 @@ public class TwitterUserServiceImplementation implements TwitterUserService{
 				e.printStackTrace();
 				return e.toString();
 			}
-		} else {
-			return "Non esiste nessun account Twitter con il seguente nome identificativo: " + username;
+		} catch (NotExistingAccountException e) {
+			e.toString();
+			e.printStackTrace();
+			return e.toString();
 		}
 	}
 
 	@Override
 	public String filterByWordInDescription(String username, String word) {
-		TwitterUser tu = initTwitterUser(username);
-		if (tu != null) {
+		try {
+			TwitterUser tu = initTwitterUser(username);
 			return new FilterByWordInDescription(tu.getFriends()).filteredData(word);
-		} else {
-			return "Non esiste nessun account Twitter con il seguente nome identificativo: " + username;
+		} catch (NotExistingAccountException e) {
+			e.toString();
+			e.printStackTrace();
+			return e.toString();
 		}
-		
 	}
 
 	@Override
 	public String filterIsYourFriend(String username, List<String> friendsNames) {
-		TwitterUser tu = initTwitterUser(username);
-		if (tu != null) {
+		try {
+			TwitterUser tu = initTwitterUser(username);
 			return new FilterIsYourFriend(tu.getFriends()).filteredData(friendsNames);
-		} else {
-			return "Non esiste nessun account Twitter con il seguente nome identificativo: " + username;
+		} catch (NotExistingAccountException e) {
+			e.toString();
+			e.printStackTrace();
+			return e.toString();
 		}
 	}
 
 	@Override
 	public String filterFollowersNumber(String username, int minFollowers) {
-		TwitterUser tu = initTwitterUser(username);
-		if (tu != null) {
+		try {
+			TwitterUser tu = initTwitterUser(username);
 			return new FilterFollowersNumber(tu.getFriends()).filteredData(minFollowers);
-		} else {
-			return "Non esiste nessun account Twitter con il seguente nome identificativo: " + username;
+		} catch (NotExistingAccountException e) {
+			e.toString();
+			e.printStackTrace();
+			return e.toString();
 		}
 	}
 
 	@Override
 	public String filterTweetsNumber(String username, int minTweets) {
-		TwitterUser tu = initTwitterUser(username);
-		if (tu != null) {
+		try {
+			TwitterUser tu = initTwitterUser(username);
 			return new FilterTweetsNumber(tu.getFriends()).filteredData(minTweets);
-		} else {
-			return "Non esiste nessun account Twitter con il seguente nome identificativo: " + username;
+		} catch (NotExistingAccountException e) {
+			e.toString();
+			e.printStackTrace();
+			return e.toString();
 		}
 	}
-
 }
 

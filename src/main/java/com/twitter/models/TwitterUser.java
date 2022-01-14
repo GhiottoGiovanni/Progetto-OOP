@@ -125,14 +125,8 @@ public class TwitterUser extends User{
 				Caller.OBJECT_MAPPER.writeValue(Paths.get(getFriendsFileName()).toFile(), this.friends);
 				System.out.println("APP: file temporaneo " + this.getUsername() + ".json salvato!");
 			} catch (StreamWriteException e) {
-				e.toString();
-				e.printStackTrace();
 			} catch (DatabindException e) {
-				e.toString();
-				e.printStackTrace();
 			} catch (IOException e) {
-				e.toString();
-				e.printStackTrace();
 			}
 		}
 	}
