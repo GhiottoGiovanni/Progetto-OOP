@@ -35,12 +35,11 @@ public class FriendsApplication {
 			    @Override
 			    public void run()
 			    {
-			        // delete stored data
 			    	try {
 						FileUtils.cleanDirectory(Paths.get(TwitterUser.FRIENDS_STORAGE_DIR).toFile());
-						System.out.println("APP: file temporanei cancellati con successo!");
+						System.out.println("APP: file temporanei cancellati con successo.");
 					} catch (IOException e) {
-						System.out.println("qualcosa è andato storto nella cancellazione dei file temporanei");
+						System.out.println("Qualcosa è andato storto nella cancellazione dei file temporanei!");
 						e.toString();
 						e.printStackTrace();
 					}

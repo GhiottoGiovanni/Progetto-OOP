@@ -76,8 +76,6 @@ public class TwitterUser extends User{
 	 * <p>Se il file json esiste e se {@link STORE_LOCALY} è <code>true</code> carica i dati dei <i>friends</i> da locale, altrimenti li carica tramite una chiamata alla Twitter API.
 	 */
 	public void initFriends() {
-
-		System.out.println(this.getClass().getSimpleName() + ".");
 		if (new File(getFriendsFileName()).exists() && STORE_LOCALY) {
 			initFriendsFromLocal();
 		} else {

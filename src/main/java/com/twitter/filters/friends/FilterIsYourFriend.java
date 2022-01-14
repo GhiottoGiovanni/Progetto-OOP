@@ -39,16 +39,15 @@ public class FilterIsYourFriend extends Filter{
 	}
 	
 	public String filteredData(List<String> friendsNames) {
-		ObjectNode root = Caller.OBJECT_MAPPER.createObjectNode();
-		ArrayNode array = Caller.OBJECT_MAPPER.createArrayNode();
+		ArrayNode lista = Caller.OBJECT_MAPPER.createArrayNode();
 		for (String friendName : friendsNames) {
 			ObjectNode node = Caller.OBJECT_MAPPER.createObjectNode();
 			node.put("name", friendName);
 			node.put("following", isFollowing(friendName));
-			array.add(node);
+			lista.add(node);
 		}
 		try {
-			return Caller.OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(root);
+			return Caller.OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(lista);
 		} catch (JsonProcessingException e) {
 			e.toString();
 			e.printStackTrace();
