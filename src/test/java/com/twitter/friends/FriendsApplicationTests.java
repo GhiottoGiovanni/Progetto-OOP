@@ -13,19 +13,33 @@ import com.twitter.models.User;
 import com.twitter.statistics.friends.FollowersAverageNumber;
 import com.twitter.statistics.friends.PercentageWithDescription;
 
+/**
+ * Classe per il testing.
+ * @author Giovanni Ghiotto
+ * @author Mihail Bobeica
+ * @version 1.0
+ */
+
 @SpringBootTest
 class FriendsApplicationTests {
 
 	@BeforeEach
 	void contextLoads() {
 	}
-	
+	/**
+	 * Test che verifica se la media dei follower degli amici viene calcolata correttamente.
+	 * @see PublicMetrics
+	 * @see FollowersAverageNumber
+	 */
 	@Test
 	@DisplayName("Test metodo della statistiche FollowersAverageNumber")
 	void followersAverageNumber() {
 		Assertions.assertEquals(76, setPublicMetricsFollowersCount(100, 40, 75, 89).getIntValue());
 	}
-	
+	/**
+	 * Test che verifica se la percentuale degli amici che hanno una descizione viene calcolata correttamente.
+	 * @see PercentageWithDescription
+	 */
 	@Test
 	@DisplayName("Test metodo della statistica PercentageWithDescription")
 	void percentageWithDescription() {
