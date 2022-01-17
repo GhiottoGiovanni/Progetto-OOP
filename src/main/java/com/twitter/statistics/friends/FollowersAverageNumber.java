@@ -11,8 +11,8 @@ import com.twitter.models.User;
  */
 public class FollowersAverageNumber extends Statistic{
 	/**
-	 * Inizializza la lista degli amici
-	 * @param friends Lista di amici
+	 * Inizializza la lista degli amici.
+	 * @param friends Lista di amici.
 	 */
 	public FollowersAverageNumber(ArrayList<User> friends) {
 		super(friends);

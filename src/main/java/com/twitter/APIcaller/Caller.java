@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Classe che gestisce le chiamate all'API di Twitter.
+ * <b>Classe</b> che gestisce le chiamate alla Twitter API v2.
  * @author Giovanni Ghiotto
  * @author Mihail Bobeica
  * @version 1.0
@@ -62,7 +62,7 @@ public class Caller {
 	}
 	
 	/**
-	 * <b>Metodo</b> che preleva i dati di un utente dall'API Twitter.
+	 * <b>Metodo</b> che preleva i dati di un utente dalla Twitter API v2.
 	 * @param username Nome identificativo dell'account Twitter.
 	 * @return Dati dell'utente in formato stringa Json.
 	 */
@@ -87,7 +87,7 @@ public class Caller {
 	}
 	
 	/**
-	 * <b>Metodo</b> che preleva i dati degli amici di un utente dall'API Twitter.
+	 * <b>Metodo</b> che preleva i dati degli amici di un utente dalla Twitter API v2.
 	 * @param username Nome identificativo dell'account Twitter.
 	 * @param nextToken Token identificativo per i risultati della pagina successiva.
 	 * @return Dati degli amici dell'utente in formato stringa Json.

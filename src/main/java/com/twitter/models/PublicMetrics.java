@@ -24,8 +24,6 @@ public class PublicMetrics {
 	 * Numero di liste.
 	 */
 	private int listed_count;
-
-	// TODO add constructors if needed
 	
 	public int getFollowers_count() {
 		return followers_count;

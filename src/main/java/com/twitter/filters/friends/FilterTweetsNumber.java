@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.twitter.models.User;
 
 /**
- * Classe che eredita da {@link FilterUsers}. Filtro della lista di amici in base alla ricerca di un numero minimo di tweet.
+ * <b>Classe</b> che eredita da {@link FilterUsers}. Filtro della lista di amici in base alla ricerca di un numero minimo di tweet.
  * @author Giovanni Ghiotto
  * @author Mihail Bobeica
  * @version 1.0

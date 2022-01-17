@@ -8,6 +8,9 @@ package com.twitter.exceptions;
  */
 
 public class NegativeNumberException extends Exception{
+	/**
+	 * @param trace Valore del numero negativo.
+	 */
 	public NegativeNumberException(String trace) {
 		super("NUMERO NEGATIVO INSERITO: " + trace + "\nINSERIRE SOLO NUMERI POSITIVI!");
 	}

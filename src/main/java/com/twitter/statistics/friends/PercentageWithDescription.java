@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 import com.twitter.models.User;
 /**
- * Classe che eredita da {@link Statistic}. Calcolo della percentuale degli amici con descrizione.
+ * <b>Classe</b> che eredita da {@link Statistic}. Calcolo della percentuale degli amici con descrizione.
  * @author Giovanni Ghiotto
  * @author Mihail Bobeica
  * @version 1.0
  */
 public class PercentageWithDescription extends Statistic {
 	/**
-	 * Inizializza la lista degli amici
-	 * @param friends Lista di amici
+	 * Inizializza la lista degli amici.
+	 * @param friends Lista di amici.
 	 */
 	public PercentageWithDescription(ArrayList<User> friends) {
 		super(friends);

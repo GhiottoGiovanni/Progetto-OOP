@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 import com.twitter.models.User;
 /**
- * Classe che eredita da {@link Statistic}. Calcolo del numero medio dei tweet degli amici.
+ * <b>Classe</b> che eredita da {@link Statistic}. Calcolo del numero medio dei tweet degli amici.
  * @author Giovanni Ghiotto
  * @author Mihail Bobeica
  * @version 1.0
  */
 public class TweetsAverageNumber extends Statistic{
 	/**
-	 * Inizializza la lista degli amici
-	 * @param friends Lista di amici
+	 * Inizializza la lista degli amici.
+	 * @param friends Lista di amici.
 	 */
 	public TweetsAverageNumber(ArrayList<User> friends) {
 		super(friends);

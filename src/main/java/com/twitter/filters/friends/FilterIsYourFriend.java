@@ -9,7 +9,7 @@ import com.twitter.APIcaller.Caller;
 import com.twitter.models.User;
 
 /**
- * Classe che eredita da {@link Filter}. Controlla se un determinato utente è tuo amico.
+ * <b>Classe</b> che eredita da {@link Filter}. Controlla se un determinato utente è tuo amico.
  * @author Giovanni Ghiotto
  * @author Mihail Bobeica
  * @version 1.0
@@ -36,7 +36,11 @@ public class FilterIsYourFriend extends Filter{
 		}
 		return false;
 	}
-	
+
+	/**
+	 * @param friendsNames Nomi dei probabili amici.
+	 * @return Stringa Json contenente i risultati.
+	 */
 	public String filteredData(List<String> friendsNames) {
 		ArrayNode data = Caller.OBJECT_MAPPER.createArrayNode();
 		int result_count = 0;

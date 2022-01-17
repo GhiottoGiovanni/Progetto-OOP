@@ -41,15 +41,13 @@ public class TwitterUser extends User{
 	public final static boolean STORE_LOCALY = true;
 	
 	/**
-	 * Lista dei <i>friends</i> (di tipo {@link User} di un utente
+	 * Lista dei <i>friends</i> (di tipo {@link User} di un utente.
 	 */
 	private ArrayList<User>	friends = new ArrayList<User>();
 	/**
-	 * Dimensione della lista degli utenti
+	 * Dimensione della lista degli utenti.
 	 */
 	private int friends_count;
-	
-	// TODO add constructors if needed
 	
 	public ArrayList<User> getFriends() {
 		return friends;
@@ -64,7 +62,6 @@ public class TwitterUser extends User{
 	}
 	
 	/**
-	 * 
 	 * @return Ritorna il nome completo del file json dove vengono temporaneamente salvati i dati dei <i>friends</i>. 
 	 */
 	private String getFriendsFileName() {
@@ -73,7 +70,7 @@ public class TwitterUser extends User{
 	
 	/**
 	 * <p>Inizializza la lista di <i>friends</i>.</p>
-	 * <p>Se il file json esiste e se {@link STORE_LOCALY} è <code>true</code> carica i dati dei <i>friends</i> da locale, altrimenti li carica tramite una chiamata alla Twitter API.
+	 * <p>Se il file json esiste e se {@link STORE_LOCALY} è <code>true</code> carica i dati dei <i>friends</i> da locale, altrimenti li carica tramite una chiamata alla Twitter API v2.
 	 */
 	public void initFriends() {
 		if (new File(getFriendsFileName()).exists() && STORE_LOCALY) {

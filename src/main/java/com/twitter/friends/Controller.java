@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import com.twitter.exceptions.NegativeNumberException;
 
@@ -28,7 +27,7 @@ public class Controller {
 	/**
 	 * <b>Rotta</b> per visualizzare le statistiche di un utente ricercato.
 	 * @param username Nome identificativo dell'account Twitter.
-	 * @return Lista delle statitische dell'utente ricercato.
+	 * @return Risultato della chiamata.
 	 */
 	@GetMapping("/stats")	
 	public ResponseEntity<String> stats(@RequestParam(value = "username") String username) {
@@ -39,7 +38,7 @@ public class Controller {
 	 * <b>Rotta</b> per visualizzare se degli utenti sono amici del profilo selezionato.
 	 * @param username Nome identificativo dell'account Twitter.
 	 * @param friendsNames Lista di utenti da ricercare nella lista di amici.
-	 * @return Lista filtrata.
+	 * @return Risultato della chiamata.
 	 */
 	@GetMapping("/filter_following")
 	public ResponseEntity<String> filterFollowing(@RequestParam(value = "username") String username, @RequestParam(value = "friends_names") List<String> friendsNames) {
@@ -49,18 +48,26 @@ public class Controller {
 	/**
 	 * <b>Rotta</b> per visualizzare la lista completa di amici.
 	 * @param username Nome identificativo dell'account Twitter.
-	 * @return Lista completa degli amici.
+	 * @return Risultato della chiamata.
 	 */
 	@GetMapping("/get_all_friends")
 	public ResponseEntity<String> getAllFriends(@RequestParam(value = "username") String username){
 		return new ResponseEntity<String>(tus.getAllFriends(username), HttpStatus.OK);
 	}
 	
+	/**
+	 * <b>Rotta</b> per filtrare la lista degli amici in base ad una serie di parametri.
+	 * @param username Nome identificativo dell'account Twitter.
+	 * @param word Parola cercata nella descrizione.
+	 * @param minTweets Numero minimo di tweet.
+	 * @param minFollowers Numero minimo di follower.
+	 * @return Risultato della chiamata.
+	 */
 	@GetMapping("/filter")
 	public ResponseEntity<String> filter(@RequestParam(value = "username") String username,
 			@RequestParam(value = "word", required = false) String word,
 			@RequestParam(value = "min_tweets", required = false) String minTweets,
-			@RequestParam(value = "min_followers", required = false) String minFollowers) throws MethodArgumentTypeMismatchException{
+			@RequestParam(value = "min_followers", required = false) String minFollowers){
 		Integer min_tweets = null;
 		if (minTweets != null) {
 			try {

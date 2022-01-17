@@ -9,7 +9,7 @@ import com.twitter.APIcaller.Caller;
 import com.twitter.models.User;
 
 /**
- * Classe filtro
+ * <b>Classe</b> filtro
  * @author Giovanni Ghiotto
  * @author Mihail Bobeica
  * @version 1.0
@@ -39,6 +39,12 @@ abstract class Filter {
 		this.setFriendsCount();
 	}
 	
+	/**
+	 * Metodo che costruisce la stringa Json contenente i dati filtrati.
+	 * @param data Dati filtrati.
+	 * @param result_count Lunghezza della lista.
+	 * @return Stringa Json.
+	 */
 	public static String structureData(ArrayNode data, int result_count) {
 		ObjectNode root = Caller.OBJECT_MAPPER.createObjectNode();
 		

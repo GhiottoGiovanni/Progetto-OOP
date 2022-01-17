@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.twitter.models.User;
 
 /**
- * Classe che eredita da {@link FilterUsers}. Filtro della lista di amici in base ad una parola contenuta nella descrizione.
+ * <b>Classe</b> che eredita da {@link FilterUsers}. Filtro della lista di amici in base ad una parola contenuta nella descrizione.
  * @author Giovanni Ghiotto
  * @author Mihail Bobeica
  * @version 1.0

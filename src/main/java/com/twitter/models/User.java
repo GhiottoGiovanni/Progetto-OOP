@@ -10,23 +10,21 @@ package com.twitter.models;
 
 public class User extends BasicUser{
 	/**
-	 * Descrizione del profilo dell'utente
+	 * Descrizione del profilo dell'utente.
 	 */
 	private String description;
 	/**
-	 * Posizione indicata nel profilo dell'utente
+	 * Posizione indicata nel profilo dell'utente.
 	 */
 	private String location;
 	/**
-	 * Indica se l'utente è un utente Twitter verificato
+	 * Indica se l'utente è un utente Twitter verificato.
 	 */
 	private boolean verified;
 	/**
-	 * Contiene dati riguardanti l'attività dell'utente
+	 * Contiene dati riguardanti l'attività dell'utente.
 	 */
 	private PublicMetrics public_metrics;
-	
-	// TODO add constructors if needed
 	
 	public String getDescription() {
 		return description;

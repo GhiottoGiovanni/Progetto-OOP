@@ -14,7 +14,7 @@ import com.twitter.statistics.friends.FollowersAverageNumber;
 import com.twitter.statistics.friends.PercentageWithDescription;
 
 /**
- * Classe per il testing.
+ * <b>Classe</b> per il testing.
  * @author Giovanni Ghiotto
  * @author Mihail Bobeica
  * @version 1.0

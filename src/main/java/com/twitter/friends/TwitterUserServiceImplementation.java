@@ -73,7 +73,6 @@ public class TwitterUserServiceImplementation implements TwitterUserService{
 		}
 	}
 
-	@Override
 	public String filterIsYourFriend(String username, List<String> friendsNames) {
 		try {
 			TwitterUser tu = initTwitterUser(username);
@@ -85,7 +84,6 @@ public class TwitterUserServiceImplementation implements TwitterUserService{
 		}
 	}
 
-	@Override
 	public String getAllFriends(String username) {
 		try {
 			TwitterUser tu = initTwitterUser(username);
@@ -101,7 +99,6 @@ public class TwitterUserServiceImplementation implements TwitterUserService{
 		}
 	}
 
-	@Override
 	public String filter(String username, String word, Integer minTweets, Integer minFollowers) throws NegativeNumberException {
 		if (word == null & minTweets == null & minFollowers == null) {
 			return null;

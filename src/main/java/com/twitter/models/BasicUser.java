@@ -1,7 +1,7 @@
 package com.twitter.models;
 
 /**
- * <b>Classe</b> utente di base
+ * <b>Classe</b> utente di base.
  * @author Giovanni Ghiotto
  * @author Mihail Bobeica
  * @version 1.0
@@ -20,17 +20,6 @@ public class BasicUser {
 	 * Nome identificativo dell'utente.
 	 */
 	private String username;
-	
-	// TODO add constructors if needed
-	public BasicUser() {
-		
-	}
-	
-	public BasicUser(String id, String name, String username) {
-		this.id = id;
-		this.name = name;
-		this.username = username;
-	}
 	
 	public String getId() {
 		return id;
