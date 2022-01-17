@@ -35,5 +35,15 @@ public interface TwitterUserService {
 	 */
 	String getAllFriends(String username);
 	
+	
+	/**
+	 * <b>Intestazione</b> del metodo che filtra la lista degli amici in base ai parametri dati.
+	 * @param username Nome identificativo dell'account Twitter.
+	 * @param word Parola cercata nella descrizione.
+	 * @param minTweets Numero minimo di tweet.
+	 * @param minFollowers Numero minimo di follower.
+	 * @return Lista filtrata.
+	 * @throws NegativeNumberException Avvisa in caso di inserimento di valori negativi.
+	 */
 	String filter(String username, String word, Integer minTweets, Integer minFollowers) throws NegativeNumberException;
 }

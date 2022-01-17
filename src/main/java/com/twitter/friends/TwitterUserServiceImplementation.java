@@ -17,6 +17,13 @@ import com.twitter.exceptions.NotExistingAccountException;
 import com.twitter.filters.friends.*;
 import com.twitter.statistics.friends.*;
 
+/**
+ * <b>Classe</b> che implementa {@link TwitterUserService}
+ * @author Giovanni Ghiotto
+ * @author Mihail Bobeica
+ * @version 1.0
+ */
+
 @Service
 public class TwitterUserServiceImplementation implements TwitterUserService{
 	
@@ -101,12 +108,12 @@ public class TwitterUserServiceImplementation implements TwitterUserService{
 		}
 		if (minTweets != null) {
 			if (minTweets.intValue() < 0) {
-				throw new NegativeNumberException();
+				throw new NegativeNumberException("min_tweets=" + minTweets.intValue());
 			}
 		}
 		if (minFollowers != null) {
 			if (minFollowers.intValue() < 0) {
-				throw new NegativeNumberException();
+				throw new NegativeNumberException("min_followers=" + minFollowers.intValue());
 			}
 		}
 		try {

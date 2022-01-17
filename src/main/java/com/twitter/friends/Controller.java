@@ -88,7 +88,7 @@ public class Controller {
 				return new ResponseEntity<String>("Devi filtrare rispetto ad almeno uno dei seguenti parametri:\nword = parola nella descrizione;\nmin_tweets = numero minimo di tweet;\nmin_followers = numero minimo di follower.", HttpStatus.BAD_REQUEST);
 			}
 		} catch (NegativeNumberException e) {
-			return new ResponseEntity<String>("I valori inseriti devono essere positivi!", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 }
