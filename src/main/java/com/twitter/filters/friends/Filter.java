@@ -57,7 +57,7 @@ abstract class Filter {
 			return Caller.OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(root);
 		} catch (JsonProcessingException e) {
 			e.toString();
-			e.printStackTrace();
+			//e.printStackTrace();
 			return e.toString();
 		}
 	}

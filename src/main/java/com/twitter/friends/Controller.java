@@ -73,7 +73,7 @@ public class Controller {
 			try {
 				min_tweets = Integer.parseInt(minTweets);
 			} catch (NumberFormatException e) {
-				return new ResponseEntity<String>("min_tweets deve essere un numero! (valore inserito: " + minTweets + ")", HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<String>("min_tweets DEVE ESSERE UN NUMERO! (valore inserito: " + minTweets + ")", HttpStatus.BAD_REQUEST);
 			}
 		}
 
@@ -82,7 +82,7 @@ public class Controller {
 			try {
 				min_followers = Integer.parseInt(minFollowers);
 			} catch (NumberFormatException e) {
-				return new ResponseEntity<String>("min_followers deve essere un numero! (valore inserito: " + minFollowers + ")", HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<String>("min_followers DEVE ESSERE UN NUMERO! (valore inserito: " + minFollowers + ")", HttpStatus.BAD_REQUEST);
 			}
 		}
 		

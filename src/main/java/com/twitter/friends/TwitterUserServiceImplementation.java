@@ -63,13 +63,13 @@ public class TwitterUserServiceImplementation implements TwitterUserService{
 				return Caller.OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(root);
 			} catch (JsonProcessingException e) {
 				e.toString();
-				e.printStackTrace();
-				return e.toString();
+				//e.printStackTrace();
+				return e.getMessage();
 			}
 		} catch (NotExistingAccountException e) {
 			e.toString();
-			e.printStackTrace();
-			return e.toString();
+			//e.printStackTrace();
+			return e.getMessage();
 		}
 	}
 
@@ -79,8 +79,8 @@ public class TwitterUserServiceImplementation implements TwitterUserService{
 			return new FilterIsYourFriend(tu.getFriends()).filteredData(friendsNames);
 		} catch (NotExistingAccountException e) {
 			e.toString();
-			e.printStackTrace();
-			return e.toString();
+			//e.printStackTrace();
+			return e.getMessage();
 		}
 	}
 
@@ -94,8 +94,8 @@ public class TwitterUserServiceImplementation implements TwitterUserService{
 			return FilterUsers.structureData(data, tu.getFriends_count());
 		} catch (NotExistingAccountException e) {
 			e.toString();
-			e.printStackTrace();
-			return e.toString();
+			//e.printStackTrace();
+			return e.getMessage();
 		}
 	}
 
@@ -130,8 +130,8 @@ public class TwitterUserServiceImplementation implements TwitterUserService{
 			return FilterUsers.structureData(filteredUsers);
 		} catch (NotExistingAccountException e) {
 			e.toString();
-			e.printStackTrace();
-			return e.toString();
+			//e.printStackTrace();
+			return e.getMessage();
 		}
 	}
 }

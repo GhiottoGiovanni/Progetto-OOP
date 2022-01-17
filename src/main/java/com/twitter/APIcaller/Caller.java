@@ -56,7 +56,7 @@ public class Caller {
 		    return bearer;
 		} catch (FileNotFoundException e) {
 			e.toString();
-			e.printStackTrace();
+			//e.printStackTrace();
 		    return null;
 		}
 	}
@@ -74,11 +74,11 @@ public class Caller {
 				return jn.at("/data").toString();
 			} catch (JsonMappingException e) {
 				e.toString();
-				e.printStackTrace();
+				//e.printStackTrace();
 				return null;
 			} catch (JsonProcessingException e) {
 				e.toString();
-				e.printStackTrace();
+				//e.printStackTrace();
 				return null;
 			}
 		} else {
@@ -134,15 +134,15 @@ public class Caller {
 			return sb.toString();
 		} catch (MalformedURLException e) {
 			e.toString();
-			e.printStackTrace();
+			//e.printStackTrace();
 			return null;
 		} catch (ProtocolException e) {
 			e.toString();
-			e.printStackTrace();
+			//e.printStackTrace();
 			return null;
 		} catch (IOException e) {
 			e.toString();
-			e.printStackTrace();
+			//e.printStackTrace();
 			return null;
 		}
 	}
@@ -160,11 +160,11 @@ public class Caller {
 				return jn.at("/data/id").asText();
 			} catch (JsonMappingException e) {
 				e.toString();
-				e.printStackTrace();
+				//e.printStackTrace();
 				return null;
 			} catch (JsonProcessingException e) {
 				e.toString();
-				e.printStackTrace();
+				//e.printStackTrace();
 				return null;
 			}
 		} else {
