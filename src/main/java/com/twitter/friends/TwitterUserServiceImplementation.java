@@ -1,5 +1,6 @@
 package com.twitter.friends;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.twitter.models.TwitterUser;
 import com.twitter.models.User;
 import com.twitter.APIcaller.Caller;
+import com.twitter.exceptions.NegativeNumberException;
 import com.twitter.exceptions.NotExistingAccountException;
 import com.twitter.filters.friends.*;
 import com.twitter.statistics.friends.*;
@@ -65,46 +67,10 @@ public class TwitterUserServiceImplementation implements TwitterUserService{
 	}
 
 	@Override
-	public String filterByWordInDescription(String username, String word) {
-		try {
-			TwitterUser tu = initTwitterUser(username);
-			return new FilterByWordInDescription(tu.getFriends()).filteredData(word);
-		} catch (NotExistingAccountException e) {
-			e.toString();
-			e.printStackTrace();
-			return e.toString();
-		}
-	}
-
-	@Override
 	public String filterIsYourFriend(String username, List<String> friendsNames) {
 		try {
 			TwitterUser tu = initTwitterUser(username);
 			return new FilterIsYourFriend(tu.getFriends()).filteredData(friendsNames);
-		} catch (NotExistingAccountException e) {
-			e.toString();
-			e.printStackTrace();
-			return e.toString();
-		}
-	}
-
-	@Override
-	public String filterFollowersNumber(String username, int minFollowers) {
-		try {
-			TwitterUser tu = initTwitterUser(username);
-			return new FilterFollowersNumber(tu.getFriends()).filteredData(minFollowers);
-		} catch (NotExistingAccountException e) {
-			e.toString();
-			e.printStackTrace();
-			return e.toString();
-		}
-	}
-
-	@Override
-	public String filterTweetsNumber(String username, int minTweets) {
-		try {
-			TwitterUser tu = initTwitterUser(username);
-			return new FilterTweetsNumber(tu.getFriends()).filteredData(minTweets);
 		} catch (NotExistingAccountException e) {
 			e.toString();
 			e.printStackTrace();
@@ -121,6 +87,43 @@ public class TwitterUserServiceImplementation implements TwitterUserService{
 				data.add(Caller.OBJECT_MAPPER.convertValue(u, JsonNode.class));
 			}
 			return FilterUsers.structureData(data, tu.getFriends_count());
+		} catch (NotExistingAccountException e) {
+			e.toString();
+			e.printStackTrace();
+			return e.toString();
+		}
+	}
+
+	@Override
+	public String filter(String username, String word, Integer minTweets, Integer minFollowers) throws NegativeNumberException {
+		if (word == null & minTweets == null & minFollowers == null) {
+			return null;
+		}
+		if (minTweets != null) {
+			if (minTweets.intValue() < 0) {
+				throw new NegativeNumberException();
+			}
+		}
+		if (minFollowers != null) {
+			if (minFollowers.intValue() < 0) {
+				throw new NegativeNumberException();
+			}
+		}
+		try {
+			TwitterUser tu = initTwitterUser(username);
+			
+			ArrayList<User> filteredUsers = tu.getFriends();
+			
+			if (word != null) {
+				filteredUsers = new FilterByWordInDescription(filteredUsers).filter(word);
+			}
+			if (minTweets != null) {
+				filteredUsers = new FilterTweetsNumber(filteredUsers).filter(minTweets.intValue());
+			}
+			if (minFollowers != null) {
+				filteredUsers = new FilterFollowersNumber(filteredUsers).filter(minFollowers.intValue());
+			}
+			return FilterUsers.structureData(filteredUsers);
 		} catch (NotExistingAccountException e) {
 			e.toString();
 			e.printStackTrace();

@@ -2,6 +2,10 @@ package com.twitter.filters.friends;
 
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.twitter.APIcaller.Caller;
 import com.twitter.models.User;
 
 /**
@@ -35,5 +39,20 @@ abstract class Filter {
 		this.setFriendsCount();
 	}
 	
-	// TODO aggiungere un metodo astratto "filteredData" che restituisca una Stringa ma abbia tipo di parametri variabile
+	public static String structureData(ArrayNode data, int result_count) {
+		ObjectNode root = Caller.OBJECT_MAPPER.createObjectNode();
+		
+		ObjectNode meta = Caller.OBJECT_MAPPER.createObjectNode();
+		meta.put("result_count", result_count);
+		
+		root.set("data", data);
+		root.set("meta", meta);
+		try {
+			return Caller.OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(root);
+		} catch (JsonProcessingException e) {
+			e.toString();
+			e.printStackTrace();
+			return e.toString();
+		}
+	}
 }

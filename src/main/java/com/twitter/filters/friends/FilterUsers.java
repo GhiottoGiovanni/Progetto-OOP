@@ -2,9 +2,8 @@ package com.twitter.filters.friends;
 
 import java.util.ArrayList;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.twitter.APIcaller.Caller;
 import com.twitter.models.User;
 
@@ -25,23 +24,15 @@ public abstract class FilterUsers extends Filter{
 		super(friends);
 	}
 	
-	/**
-	 * @return Ritorna i dati strutturati.
-	 */
-	public static String structureData(ArrayNode data, int result_count) {
-		ObjectNode root = Caller.OBJECT_MAPPER.createObjectNode();
-		
-		ObjectNode meta = Caller.OBJECT_MAPPER.createObjectNode();
-		meta.put("result_count", result_count);
-		
-		root.set("data", data);
-		root.set("meta", meta);
-		try {
-			return Caller.OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(root);
-		} catch (JsonProcessingException e) {
-			e.toString();
-			e.printStackTrace();
-			return e.toString();
+	public abstract <T> ArrayList<User> filter(T x);
+
+	public static String structureData(ArrayList<User> filteredUsers) {
+		ArrayNode data = Caller.OBJECT_MAPPER.createArrayNode();
+		int result_count = 0;
+		for (User u : filteredUsers) {
+			data.add(Caller.OBJECT_MAPPER.convertValue(u, JsonNode.class));
+			result_count++;
 		}
+		return structureData(data, result_count);
 	}
 }

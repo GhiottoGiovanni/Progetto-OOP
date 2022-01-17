@@ -2,9 +2,6 @@ package com.twitter.filters.friends;
 
 import java.util.ArrayList;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.twitter.APIcaller.Caller;
 import com.twitter.models.User;
 
 /**
@@ -23,18 +20,14 @@ public class FilterTweetsNumber extends FilterUsers{
 		super(friends);
 	}
 	
-	/**
-	 * @return Ritorna la lista di amici con un determinato numero minimo di tweet.
-	 */
-	public String filteredData(int minTweets) {
-		ArrayNode data = Caller.OBJECT_MAPPER.createArrayNode();
-		int result_count = 0;
+	@Override
+	public <T> ArrayList<User> filter(T x) {
+		ArrayList<User> filteredUsers = new ArrayList<User>();
 		for (User u : getFriends()) {
-			if (u.getPublic_metrics().getTweet_count() >= minTweets) {
-				data.add(Caller.OBJECT_MAPPER.convertValue(u, JsonNode.class));
-				result_count++;
+			if (u.getPublic_metrics().getTweet_count() >= (int) x) {
+				filteredUsers.add(u);
 			}
 		}
-		return structureData(data, result_count);
+		return filteredUsers;
 	}
 }

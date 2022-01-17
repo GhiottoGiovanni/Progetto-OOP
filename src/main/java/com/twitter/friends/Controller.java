@@ -8,6 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+
+import com.twitter.exceptions.NegativeNumberException;
 
 /**
  * <b>Classe</b> controller che gestisce le chiamate.
@@ -33,17 +36,6 @@ public class Controller {
 	}
 	
 	/**
-	 * <b>Rotta</b> per visualizzare la lisat di amici di un utente cercato con una specifica parola nella descizione del profilo.
-	 * @param username Nome identificativo dell'account Twitter.
-	 * @param word Parola chiave specifica da cercare nella descizione degli amici.
-	 * @return Lista filtrata.
-	 */
-	@GetMapping("/filter_by_word_in_description")	
-	public ResponseEntity<String> filterByWordInDescription(@RequestParam(value = "username") String username, @RequestParam(value = "word") String word) {
-		return new ResponseEntity<String>(tus.filterByWordInDescription(username, word), HttpStatus.OK);
-	}
-	
-	/**
 	 * <b>Rotta</b> per visualizzare se degli utenti sono amici del profilo selezionato.
 	 * @param username Nome identificativo dell'account Twitter.
 	 * @param friendsNames Lista di utenti da ricercare nella lista di amici.
@@ -55,28 +47,6 @@ public class Controller {
 	}
 	
 	/**
-	 * <b>Rotta</b> per visualizzare la lista di amici con un numero minimo di follower.
-	 * @param username Nome identificativo dell'account Twitter.
-	 * @param minFollowers Numero minimo di follower.
-	 * @return Lista filtrata.
-	 */
-	@GetMapping("/filter_followers_number")
-	public ResponseEntity<String> filterFollowersNumber(@RequestParam(value = "username") String username, @RequestParam(value = "min_followers") int minFollowers) {
-		return new ResponseEntity<String>(tus.filterFollowersNumber(username, minFollowers), HttpStatus.OK);
-	}
-	
-	/**
-	 * <b>Rotta</b> per visualizzare la lista di amici con un numero minimo di tweet.
-	 * @param username Nome identificativo dell'account Twitter.
-	 * @param minTweets Numero minimo di tweet.
-	 * @return Lista filtrata.
-	 */
-	@GetMapping("/filter_tweets_number")
-	public ResponseEntity<String> filterTweetsNumber(@RequestParam(value = "username") String username, @RequestParam(value = "min_tweets") int minTweets) {
-		return new ResponseEntity<String>(tus.filterTweetsNumber(username, minTweets), HttpStatus.OK);
-	}
-	
-	/**
 	 * <b>Rotta</b> per visualizzare la lista completa di amici.
 	 * @param username Nome identificativo dell'account Twitter.
 	 * @return Lista completa degli amici.
@@ -84,5 +54,41 @@ public class Controller {
 	@GetMapping("/get_all_friends")
 	public ResponseEntity<String> getAllFriends(@RequestParam(value = "username") String username){
 		return new ResponseEntity<String>(tus.getAllFriends(username), HttpStatus.OK);
+	}
+	
+	@GetMapping("/filter")
+	public ResponseEntity<String> filter(@RequestParam(value = "username") String username,
+			@RequestParam(value = "word", required = false) String word,
+			@RequestParam(value = "min_tweets", required = false) String minTweets,
+			@RequestParam(value = "min_followers", required = false) String minFollowers) throws MethodArgumentTypeMismatchException{
+		Integer min_tweets = null;
+		if (minTweets != null) {
+			try {
+				min_tweets = Integer.parseInt(minTweets);
+			} catch (NumberFormatException e) {
+				return new ResponseEntity<String>("min_tweets deve essere un numero! (valore inserito: " + minTweets + ")", HttpStatus.BAD_REQUEST);
+			}
+		}
+
+		Integer min_followers = null;
+		if (minFollowers != null) {
+			try {
+				min_followers = Integer.parseInt(minFollowers);
+			} catch (NumberFormatException e) {
+				return new ResponseEntity<String>("min_followers deve essere un numero! (valore inserito: " + minFollowers + ")", HttpStatus.BAD_REQUEST);
+			}
+		}
+		
+		String result;
+		try {
+			result = tus.filter(username, word, min_tweets, min_followers);
+			if (result != null) {
+				return new ResponseEntity<String>(result, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<String>("Devi filtrare rispetto ad almeno uno dei seguenti parametri:\nword = parola nella descrizione;\nmin_tweets = numero minimo di tweet;\nmin_followers = numero minimo di follower.", HttpStatus.BAD_REQUEST);
+			}
+		} catch (NegativeNumberException e) {
+			return new ResponseEntity<String>("I valori inseriti devono essere positivi!", HttpStatus.BAD_REQUEST);
+		}
 	}
 }

@@ -11,6 +11,6 @@ public class NotExistingAccountException extends Exception{
 	 * @param username Nome identificativo di un utente.
 	 */
 	public NotExistingAccountException(String username){
-		super("Non esiste nessun account Twitter con il seguente nome identificativo: " + username);
+		super("NON ESISTE NESSUN ACCOUNT TWITTER CON IL SEGUENTE NOME IDENTIFICATIVO: " + username);
 	}
 }

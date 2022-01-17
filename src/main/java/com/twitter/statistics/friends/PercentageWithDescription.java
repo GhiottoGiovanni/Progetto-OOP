@@ -29,7 +29,9 @@ public class PercentageWithDescription extends Statistic {
 					friendsWithDescription++;
 				}
 			}
-			return 100d * friendsWithDescription / getFriendsCount();
+			double result = 100d * friendsWithDescription / getFriendsCount();
+			// arrotondato alla seconda cifra decimale
+			return Math.round(result * 100) / 100d;
 		} else {
 			return 0;
 		}

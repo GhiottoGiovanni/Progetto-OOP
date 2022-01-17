@@ -3,7 +3,6 @@ package com.twitter.filters.friends;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.twitter.APIcaller.Caller;
@@ -16,7 +15,7 @@ import com.twitter.models.User;
  * @version 1.0
  */
 
-public class FilterIsYourFriend extends FilterUsers{
+public class FilterIsYourFriend extends Filter{
 	/**
 	 * Inizializza la lista degli amici
 	 * @param friends Lista di amici

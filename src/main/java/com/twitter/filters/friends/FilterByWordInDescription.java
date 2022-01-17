@@ -2,9 +2,6 @@ package com.twitter.filters.friends;
 
 import java.util.ArrayList;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.twitter.APIcaller.Caller;
 import com.twitter.models.User;
 
 /**
@@ -22,20 +19,16 @@ public class FilterByWordInDescription extends FilterUsers{
 	public FilterByWordInDescription(ArrayList<User> friends) {
 		super(friends);
 	}
-	
-	/**
-	 * @return Ritorna la lista di amici la descizione dei quali contiene una parola data.
-	 */
-	public String filteredData(String word) {
-		ArrayNode data = Caller.OBJECT_MAPPER.createArrayNode();
-		int result_count = 0;
+
+	@Override
+	public <T> ArrayList<User> filter(T x) {
+		ArrayList<User> filteredUsers = new ArrayList<User>();
 		for (User u : getFriends()) {
 			// avoids case sensitivity
-			if (u.getDescription().toLowerCase().contains(word.toLowerCase())) {
-				data.add(Caller.OBJECT_MAPPER.convertValue(u, JsonNode.class));
-				result_count++;
+			if (u.getDescription().toLowerCase().contains(((String) x).toLowerCase())) {
+				filteredUsers.add(u);
 			}
 		}
-		return structureData(data, result_count);
+		return filteredUsers;
 	}
 }

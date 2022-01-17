@@ -32,9 +32,9 @@ class FriendsApplicationTests {
 	 * @see FollowersAverageNumber
 	 */
 	@Test
-	@DisplayName("Test metodo della statistiche FollowersAverageNumber")
+	@DisplayName("Test metodo della statistia FollowersAverageNumber")
 	void followersAverageNumber() {
-		Assertions.assertEquals(76, setPublicMetricsFollowersCount(100, 40, 75, 89).getIntValue());
+		Assertions.assertEquals(76, setPublicMetricsFollowersCount(100, 40, 75, 89, 76).getIntValue());
 	}
 	/**
 	 * Test che verifica se la percentuale degli amici che hanno una descizione viene calcolata correttamente.
