@@ -8,9 +8,21 @@ package com.twitter.models;
  */
 
 public class PublicMetrics {
+	/**
+	 * Numero di follower.
+	 */
 	private int followers_count;
+	/**
+	 * Numero di persone seguite.
+	 */
 	private int following_count;
+	/**
+	 * Numero di tweet.
+	 */
 	private int tweet_count;
+	/**
+	 * Numero di liste.
+	 */
 	private int listed_count;
 
 	// TODO add constructors if needed

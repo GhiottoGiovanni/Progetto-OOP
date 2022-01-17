@@ -9,15 +9,15 @@ package com.twitter.models;
 
 public class BasicUser {
 	/**
-	 * ID dell'utente
+	 * ID dell'utente.
 	 */
 	private String id;
 	/**
-	 * Nome dell'utente
+	 * Nome dell'utente.
 	 */
 	private String name;
 	/**
-	 * Nome identificativo dell'utente
+	 * Nome identificativo dell'utente.
 	 */
 	private String username;
 	
