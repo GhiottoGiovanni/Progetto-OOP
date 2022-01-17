@@ -1,7 +1,9 @@
 package com.twitter.friends;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.boot.SpringApplication;
@@ -35,14 +37,8 @@ public class FriendsApplication {
 			    @Override
 			    public void run()
 			    {
-			    	try {
-						FileUtils.cleanDirectory(Paths.get(TwitterUser.FRIENDS_STORAGE_DIR).toFile());
-						System.out.println("APP: file temporanei cancellati con successo.");
-					} catch (IOException e) {
-						System.out.println("Qualcosa è andato storto nella cancellazione dei file temporanei!");
-						e.toString();
-						e.printStackTrace();
-					}
+			    	Arrays.stream(Paths.get(TwitterUser.FRIENDS_STORAGE_DIR).toFile().listFiles((f, p) -> p.endsWith(".json"))).forEach(File::delete);
+					System.out.println("APP: file temporanei cancellati con successo.");
 			    }
 			});
 		}
