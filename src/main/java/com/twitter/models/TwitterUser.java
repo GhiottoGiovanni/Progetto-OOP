@@ -49,10 +49,26 @@ public class TwitterUser extends User{
 	 */
 	private int friends_count;
 	
+	/**
+	 * Prende la lista di amici.
+	 * @return Lista di amici.
+	 */
 	public ArrayList<User> getFriends() {
 		return friends;
 	}
 	
+	/**
+	 * Imposta la lista di amici.
+	 * @param friends Lista di amici.
+	 */
+	public void setFriends(ArrayList<User> friends) {
+		this.friends = friends;
+	}
+	
+	/**
+	 * Prende la lunghezza della lista degli amici.
+	 * @return Lunghezza lista di amici.
+	 */
 	public int getFriends_count() {
 		return friends_count;
 	}
