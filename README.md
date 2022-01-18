@@ -16,7 +16,7 @@ L'utente, grazie ad un browser o a [Postman](https://www.postman.com 'Vai su Pos
 
 ## Rotte
 L'utente può effettuare le richieste dal seguente indirizzo:
-```http
+```
 http://localhost:8080
 ```
 Le rotte sono le seguenti:
@@ -53,9 +53,9 @@ Risultato della chiamata:
             }
         },
 
-        .
-        .
-        .
+        {
+           "continua..."
+        },
 
         {
             "id": "377914543",
@@ -143,9 +143,9 @@ Risultato della chiamata:
             }
         },
 
-        .
-        .
-        .
+        {
+           "continua..."
+        },
 
         {
             "id": "146892041",
@@ -190,9 +190,9 @@ Risultato della chiamata:
             }
         },
 
-        .
-        .
-        .
+        {
+           "continua..."
+        },
 
         {
             "id": "145578712",
@@ -262,6 +262,8 @@ Il Json sopra riportato presenta due nodi:
 ## DOCUMENTAZIONE
 Il codice è stato commentato in Javadoc.
 
+Il javadoc si trova nella cartella *doc* del progetto
+
 ---
 
 ## STRUMENTI UTILIZZATI
@@ -275,13 +277,20 @@ Il codice è stato commentato in Javadoc.
 ---
 
 ## ECCEZIONI
+Tra le eccezioni standard utilizzate ne indichiamo una in particolare:
+- NumberFormatException
+
+  Viene richiamata quando l'utente inserisce valori alfanumerici nei campi che accettano solo valori numerici. Viene visualizzato il seguente messaggio:
+  ```java 
+  "[campo] DEVE ESSERE UN NUMERO! (valore inserito: [traccia])"
+  ``` 
 Oltre alle eccezioni standard di java abbiamo aggiunto delle eccezioni personalizzate: 
 - NotExistingAccountException 
    
   Viene richiamata quando l'utente cercato non è presente nell'api di twitter. Viene visualizzato il seguente messaggio:
   ```java
   "NON ESISTE NESSUN ACCOUNT TWITTER CON IL SEGUENTE NOME IDENTIFICATIVO: [username]"
-  ```  
+  ```
 
 - NegativeNumberException
 
